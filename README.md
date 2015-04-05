@@ -13,7 +13,7 @@ I'm not a big fan of 'your' as in "Add this to your code". I prefer the use of "
 ### Common 'gotchas'
 SitePoint writers are an international bunch of people, so the level of written English varies. That's fine, but here is a list of common mistakes I find in articles submitted by non-native speakers to learn from and avoid.
 
-* To follow…
+* To follow.
 
 ## Images
 
