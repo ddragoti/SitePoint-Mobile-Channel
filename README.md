@@ -51,7 +51,7 @@ Writing and submitting articles is only one part of what SitePoint is about, we 
 If you are an existing writer, the submission process for articles has changed to allow for a more collaborative process to facilitate feedback and let us all learn from each other. This process and set-up has been [heavily borrowed from our PHP editor](https://github.com/sitepoint-editors/php-peers).
 
 ### Pre-Writing
-1. Submit an idea on teh channel's [Trello board](https://trello.com/b/HxaTeMXt/sitepoint-mobile-channel) into the 'Topic Suggestions' column.
+1. Submit an idea on the channel's [Trello board](https://trello.com/b/HxaTeMXt/sitepoint-mobile-channel) into the 'Topic Suggestions' column.
 2. We will discuss the topic on the Trello card.
 3. Please don't start a topic until it has been accepted, otherwise you may waste your time on writing something that wont be published.
 
