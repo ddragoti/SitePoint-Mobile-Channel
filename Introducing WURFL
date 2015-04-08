@@ -1,4 +1,4 @@
-#Introducing wurfl.js - a simple device detection repository
+##Introducing wurfl.js - a simple device detection repository
 
 In this day and age we hear a lot about what is called responsive design. Designing responsive web pages is a skill that many are chasing and with the multitude of free tools available out there is becoming easier and easier.
 
@@ -12,20 +12,20 @@ The purpose behind WURFL is to enable developers to present content nicely and p
 
 Now let’s get our hands dirty, firstly you need to add this line of Javascript to your page:
 
-<script type='text/javascript' src="//wurfl.io/wurfl.js"></script>
+><script type='text/javascript' src="//wurfl.io/wurfl.js"></script>
 
 So essentially you just imported a JS file and that enables you to access the WURFL object in JavaScript, which looks like this:
 
-{
-  complete_device_name:"Google Nexus 4",
-  form_factor:"Smartphone",
-  is_mobile:true
-}
+>{
+>  complete_device_name:"Google Nexus 4",
+>  form_factor:"Smartphone",
+>  is_mobile:true
+>}
 
 
-I quickly set up an example page here: http://ddragoti.github.io/WURFL/ so you can see it in action. 
+I quickly set up an example page [here](http://ddragoti.github.io/WURFL/), so you can see it in action. 
+The source code is hosted on github and you can have a look at it [here](https://github.com/ddragoti/WURFL/blob/gh-pages/index.html) .
 
-The source code is hosted on github and you can have a look at it here: https://github.com/ddragoti/WURFL/blob/gh-pages/index.html .
 You probably noticed that there are only three properties there:
 
 complete_device_name which gives you the make and model of the device accessing your website, but if it is a desktop device it will give you a generic “desktop computer” response.
@@ -37,18 +37,17 @@ is_mobile is a boolean function which can be either true or false depending on t
 
 This enables you to do things like: 
 
-if(!WURFL.is_mobile){
-
-      $('#wurfl .is-mobile span').html("false");
-
-}
+>if(!WURFL.is_mobile){
+>
+>      $('#wurfl .is-mobile span').html("false");
+>}
 
 
 
 #Advertising
 
 WURFL can also help you in better targeting of ads, there are ads out there that look better on mobile devices and others that are more appropriate for desktops or laptops. WURFL can help you control how ads get displayed and in what kind of devices. Also being able to design how advertising gets displayed depending on screen sizes and the type of device is a pretty good feature by itself.
-You can simply control the ads by using WURFL.is_mobile feature or if you want to have more control use the form_factor option and target ads depending on the type of device.
+You can simply control the ads by using *WURFL.is_mobile* feature or if you want to have more control use the *form_factor* option and target ads depending on the type of device.
 
 #WURFL and Modernizr
 
@@ -59,7 +58,7 @@ On the contrary, using WURFL and Modernizr together will give you fine grained c
 
 A fine example is the CSS capabilities of Modernizr, where it allows you to use different styles depending on the device. This great feature is available on WURFL too and you need a single line of Javascript for it to work:
 
-document.documentElement.className += ' ' + (WURFL.is_mobile ? '' : 'no-') + "mobile";
+>document.documentElement.className += ' ' + (WURFL.is_mobile ? '' : 'no-') + "mobile";
 
 In this simple case, when a device is mobile the html tag will be assigned the “is_mobile” class, otherwise the class will be equal to “no-is_mobile”.
 After this, you can create different style sheets depending on the class assigned. 
