@@ -1,5 +1,7 @@
 #What's Up Doc... Can You Prescribe Me An App?!
-You may think that the title of this article is just a joke. It is actually no joke at all! Yes, [mobile technology is changing healthcare](http://www.sitepoint.com/mobile-technology-changing-healthcare/), to the extent that the UK's National Health Service (NHS) is hoping to introduce a new [kitemarking of apps](http://www.cnbc.com/id/102181407) scheme, where apps will be accredited with the NHS logo.
+
+The title of this article is actually no joke all! [Mobile technology is changing healthcare](http://www.sitepoint.com/mobile-technology-changing-healthcare/), to the extent that the UK's National Health Service (NHS) is hoping to introduce a new [kitemarking of apps](http://www.cnbc.com/id/102181407) scheme, where apps will be accredited with the NHS logo.
+
 ## What is kitemarking?
 [kitemark](http://en.wikipedia.org/wiki/Kitemark) is a service quality certification mark owned and operated by the [British Standards Institution (BSI Group)](http://en.wikipedia.org/wiki/BSI_Group). It is frequently used to identify products where safety is essential, such as smoke alarms and crash helmets.
 
