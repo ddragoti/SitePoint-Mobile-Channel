@@ -9,6 +9,7 @@ What is a kitemark?
 A [Kitemark](http://en.wikipedia.org/wiki/Kitemark) is a service quality certification mark owned and operated by the [British Standards Institution (BSI Group)](http://en.wikipedia.org/wiki/BSI_Group). It is frequently used to identify products where safety is essential, such as smoke alarms and crash helmets.
 
 When we see the NHS mentioning a kitemark for healthcare apps, it gives us two indications:
+
 - The important role mobile technology is playing in our lives.
 - That using a health app for monitoring someone's health should not be taken lightly, and the selection of a health care app should be a guided process.
 
@@ -17,7 +18,9 @@ Quantity of apps
 
 Specifically looking at Healthcare apps, there are now close to 100,000 related apps in the Android and iOS app stores ([based on a 2013 report](http://www.bmj.com/content/347/bmj.f6009)).
 
-The risk with health apps is that they can have repercussions on the indivdual user's health and safety. If you are using a to-do app, for instance, and you didn't stick too it, or make an error in your to do list, there would be no harm to you, just some stress in catching up with late or forgotten tasks. But, when it comes to health monitoring and treatment, the consequences may be far greater.
+The risk with health apps is that they can have repercussions on the indivdual user's health and safety.
+
+If you are using a to-do app and you didn't stick too it, or make an error in your to do list, there would be no harm to you, just some stress in catching up with late or forgotten tasks. But when it comes to health monitoring and treatment, the consequences may be far greater.
 
 Because of this, a kitemark is a means to provide quality control to the consumer drowning in the increasing number of health apps, allowing them to distinguish between apps which are created under the auspice of health professionals, diagnosticians and researchers who use medically tested tools and credible health information and those that could be considered the work of a charlatan or an enthusiastic well-meaning coach.
 
