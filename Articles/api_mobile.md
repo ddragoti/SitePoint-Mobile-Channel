@@ -1,24 +1,26 @@
 # Building a simple REST API for mobile applications
 ## What is REST?
 
-REST or Representational State Transfer is lightweight HTTP based and build on web servers much like how normal web sites are build on the backend.  Instead of delivering in HTML, which is a combination of presentation and data, we would just deliver data with a minimum number of separators and delimiters (like JSON).  It is  just an architectural style for designing networked applications or it can be viewed as a different way of delivering web services.  REST is browsable so it really helps developers modify and check the correctness of their code as only the data is displayed on the website.  It is also a safer way of providing services or data access as it does not expose too much unnecessary surface area of the database used by the website.  Some more well-known REST apis are from [Twitter](https://dev.twitter.com/rest/public)  and [Facebook Graph](https://developers.facebook.com/docs/graph-api). 
+REST or Representational State Transfer is lightweight, HTTP based and build on web servers not unlike how normal web sites are build on the backend.  Instead of delivering in HTML (a combination of presentation and data), we would deliver data with a minimum number of separators and delimiters (like JSON).  It's architectural style for designing networked applications and a different way of delivering web services.  REST is browsable so it really helps developers modify and check the correctness of their code, as only the data is displayed on the website.  It is also a safer way of providing services or data access as it does not expose too much unnecessary surface area of the database used by the website.  Some more well-known REST apis are from [Twitter](https://dev.twitter.com/rest/public)  and [Facebook Graph](https://developers.facebook.com/docs/graph-api). 
 
-REST is platform and language independent.  Although I do recommend languages that are commonly associated with website publishing like PHP, Python or Ruby.  There are four commonly defined methods used in a REST architecture which are the create, read, update and delete methods.  We can also add other more specialize methods like getting the top ten most popular items or the highscore of all users either by writing a new method or using a query parameter like `/api/items?top=10`.
+REST is platform and language independent, although I recommend using PHP, Python or Ruby. There are four commonly defined methods used in a REST architecture: the create, read, update and delete methods. We can also add other more specialist methods like getting 'the top ten most popular items' or 'the highscore of all users' either by writing a new method or using a query parameter like `/api/items?top=10`.
  
 ## HTTP Methods and API endpoints
 
-You might remember from creating web forms (synchronous) or ajax request (asynchronous) calls where you have used the GET and POST requests.  The PUT and DELETE requests are very much far less used.
-You’ve probably had written using PHP, Python or any other language to process form data, you have indeed written your own simple REST framework.
-POST, GET, PUT, DELETE which correspond to create, read, update, delete (CRUD) also related to the most basic of database operations
-API endpoints describe available operations on data exposed by the service.  Think of it as urls that provide data (GET request) or an url where you can submit data to (POST request).
+You might remember using the GET and POST requests when creating web forms (synchronous) or ajax requests (asynchronous). You’ve probably used PHP, Python or any other language to process form data. Through doing these things, you have indeed written your own simple REST framework.
+
+POST, GET, PUT,  DELETE correspond to create, read, update, delete (CRUD) and are also related to the most basic of database operations. API endpoints describe available operations on exposed data. Think of it as urls that provide data (GET request) or an url where you can submit data to (POST request).
+
 There are many data formats we could use but the more common ones are JSON and XML.
 GET /api/boats/123456 will return data on the boat with id 123456 even when applied multiple times.
 
-## Using djangorestframework to build a simple REST api
+## Using djangorest framework to build a simple REST api
 
-We will be using Django (Python MVC) and djangorestframework.  Djangorestframework is built using django (python) specifically for exposing data via the REST framework.  We assume the reader is familiar with Django and will build a simple REST API to access data inside a database (just one table).  Here are the steps and code to create model and views.  For ease of entering data, we will input them using the existing Django admin page.
+Now I'm going to walk you through how to build a simple REST api using the Django (Python MVC) and django REST framework to  access data inside a database (just one table).  Django REST framework is built using django (python) specifically for exposing data via the REST framework.  
 
-To start of, you will need to have already installed Python >v2.7 and Django v1.7.4 on your system that could publish web pages.  If you have not, please install [Python](http://www.python.org/download/) and [Django](https://www.djangoproject.com/download/).
+Here are the steps and code to create model and views.  For ease of entering data, we will input them using the existing Django admin page:
+
+To start off, you will need to have already installed Python >v2.7 and Django v1.7.4 on your system.  If you have not, please install [Python](http://www.python.org/download/) and [Django](https://www.djangoproject.com/download/).
 
 You can easily test your installation by firing up your command line, and type the `python` command.  You should see 
 ```bash
@@ -61,9 +63,9 @@ Django version 1.7.4, using settings 'mysite.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
-and if you browse to the URL http://127.0.0.1:8000/ you will see a placeholder website that convinces you that you have done everything correctly up till now.
+and if you browse to the URL http://127.0.0.1:8000/ you will see a placeholder website that convinces you that you have done everything correctly so far.
 
-So now you have created the bare skeleton of the site, next we will build an app (just a container) which houses a model (as in Model-View-Controller).  A model is the source of data for your app.  We are not going to talk too much about this but you can refer to more information about how to use models properly on the django website or any other MVC site.
+So now you have created the bare skeleton of the site. Now we will build an app (just a container) which houses a model (as in Model-View-Controller).  A model is the source of data for your app.  You can refer to more information about how to use models properly on the django website or any other MVC site.
 ```
 $ python manage.py startapp fishes
 ```
@@ -98,13 +100,13 @@ $ python manage.py runserver
 ```
 and enter your username and password.  You should see a admin page with the `Marine` list.  Click on `Fishes` to add or modify data.  Add some data to it.
 
-Up to this point, you have built a working albeit plain Django website.  We will now incorporate djangorestframework to the site by downloading and installing it from http://www.django-rest-framework.org/#installation .  One key thing to remember is to add `rest_framework` into the `INSTALLED_APPS` list in `marine/settings.py` and add
+Up to this point, you have built a working, albeit plain, Django website.  We will now incorporate Django REST framework to the site by downloading and installing it from http://www.django-rest-framework.org/#installation .  One key thing to remember is to add `rest_framework` into the `INSTALLED_APPS` list in `marine/settings.py` and add:
 ```python
 url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ```
 to the `urls.py` file under the folder `marine`.
 
-When we installed djangorestframework, it gave us the ability to use serializers, which basically flattens the data obtained from the fish model into string format, either XML or JSON.  To create a serializer for the fishes model, we create a file under the `fishes` folder and call it `serializers.py`.  Here are the contents.
+When we installed Django REST framework, it gave us the ability to use serializers, which basically flatten the data obtained from the fish model into string format, either XML or JSON.  To create a serializer for the fish model, we create a file under the `fishes` folder and call it `serializers.py`.  Here are the contents:
 ```python
 from fish.models import Fish
 from rest_framework import serializers
@@ -114,7 +116,7 @@ class FishSerializer(serializers.HyperlinkedModelSerializer):
         model = Media
         fields = ('name', 'active', 'created')
 ```
-and in the `views.py` file, add
+and in the `views.py` file, add:
 ```python
 from rest_framework import viewsets
 from fishes.serializers import FishSerializer
@@ -147,7 +149,7 @@ Allow: GET, POST, HEAD, OPTIONS
 
 ## The iOS mobile app
 
-We'll go through the key steps required to create a mobile app that receives data from our API.  We are going to use the UITableView to display our data in a list.  In XCode 6, create a new project
+Here I will detail the key steps required to create a mobile app that receives data from our API.  We are going to use the UI Table View to display our data in a list.  In XCode 6, create a new project:
 
 File > New > Project > iOS Application > Single View Application
 
@@ -158,7 +160,7 @@ we do not use Core Data for now.
 
 Select a location on disk to save your project and then click Create.
 
-By default, the project will be created with a View Controller.  We however will want to show the data from the REST api as a list, so we will use the Table View Controller instead.  So we will create a new set Objective-C files (File > New > File > iOS Source > Cocoa Touch Class).
+By default, the project will be created with a View Controller.  We will however, want to show the data from the REST api as a list, so we will use the Table View Controller instead.  So we will create a new set Objective-C files (File > New > File > iOS Source > Cocoa Touch Class).
 
 Class: TableViewController
 Subclass of: UITableViewController
@@ -229,7 +231,7 @@ Next we need a way to obtain JSON from the REST api we published using djangores
     }
 }
 ```
-Also, we update the method numberOfRowsInSection.  The code makes sure that the number of rows matches the number of elements as contained in the fishJson array.
+We now update the method number of rows in section.  The code makes sure that the number of rows matches the number of elements as contained in the fishJson array.
 ```objectivec
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
