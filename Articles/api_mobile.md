@@ -1,7 +1,7 @@
 # Building a simple REST API for mobile applications
 ## What is REST?
 
-REST or Representational State Transfer is lightweight, HTTP based and built on web servers not unlike how normal web sites are built on the backend.  Instead of delivering in HTML (a combination of presentation and data), we deliver data with a minimum number of separators and delimiters (like JSON).  It's architectural style for designing networked applications and a different way of delivering web services.  REST is browsable so it really helps developers modify and check the correctness of their code, as only the data is displayed on the website.  It is also a safer way of providing services or data access as it does not expose too much unnecessary surface area of the database used by the website.  Some more well-known REST apis are from [Twitter](https://dev.twitter.com/rest/public)  and [Facebook Graph](https://developers.facebook.com/docs/graph-api). 
+REST or Representational State Transfer is lightweight, HTTP based and built on web servers not unlike how normal web sites are built on the backend.  Instead of delivering in HTML (a combination of presentation and data), we deliver data with a minimum number of separators and delimiters (like JSON).  It's an architectural style for designing networked applications and a different way of delivering web services.  REST is browsable so it really helps developers modify and check the preciseness of their code, as only the data is displayed on the website.  It is also a safer way of providing services or data access as it does not expose too much unnecessary surface area of the database used by the website.  Some more well-known REST apis are from [Twitter](https://dev.twitter.com/rest/public)  and [Facebook Graph](https://developers.facebook.com/docs/graph-api). 
 
 REST is platform and language independent, although I recommend using PHP, Python or Ruby. There are four commonly defined methods used in a REST architecture: the create, read, update and delete methods. We can also add other more specialist methods like getting 'the top ten most popular items' or 'the highscore of all users' either by writing a new method or using a query parameter like `/api/items?top=10`.
  
@@ -196,7 +196,7 @@ In the Main.storyboard, expand the Table View Controller to expose Table View Ce
     return cell;
 }
 ```
-Next we need a way to obtain JSON from the REST api we published using djangorestframework.  We first establish an NSArray object called `fishJson` by registering it in the @interface level and synthesizing it with `@property` and `@synthesize`.  This replaces the codes for the setters and getters.  We then replace the code we had in the `numberOfRowsInSection`, where we change `fishes` with `fishJson` which contain the JSON we downloaded from the REST api.
+Next we need a way to obtain JSON from the REST api we published using django REST framework.  We first establish an NSArray object called `fishJson` by registering it in the @interface level and synthesizing it with `@property` and `@synthesize`.  This replaces the codes for the setters and getters.  We then replace the code we had in the `numberOfRowsInSection`, where we change `fishes` with `fishJson` which contain the JSON we downloaded from the REST api.
 ```objectivec
 @interface TableViewController ()
 @property (strong) NSArray *fishJson;
