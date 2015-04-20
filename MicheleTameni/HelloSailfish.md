@@ -22,11 +22,11 @@ Go on clicking next again, fill in your project description, click next and choo
 The project is now ready. The entry point of your app will be the "src/yourappname.cpp":
 
 `
-#ifdef QT_QML_DEBUG
-#include <QtQuick>
-#endif
+\#ifdef QT_QML_DEBUG
+\#include <QtQuick>
+\#endif
 
-#include <sailfishapp.h>
+\#include <sailfishapp.h>
 
 
 int main(int argc, char *argv[])
