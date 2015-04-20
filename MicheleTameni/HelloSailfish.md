@@ -22,26 +22,12 @@ Go on clicking next again, fill in your project description, click next and choo
 The project is now ready. The entry point of your app will be the "src/yourappname.cpp":
 
 `
-\#ifdef QT_QML_DEBUG
-\#include <QtQuick>
-\#endif
+	int main(int argc, char *argv[])
+	{
+ 
+     return SailfishApp::main(argc, argv);
+	}
 
-\#include <sailfishapp.h>
-
-
-int main(int argc, char *argv[])
-{
-    // SailfishApp::main() will display "qml/template.qml", if you need more
-    // control over initialization, you can use:
-    //
-    //   - SailfishApp::application(int, char *[]) to get the QGuiApplication *
-    //   - SailfishApp::createView() to get a new QQuickView * instance
-    //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
-    //
-    // To display the view, call "show()" (will show fullscreen on device).
-
-    return SailfishApp::main(argc, argv);
-}
 `
 
 This is the only strictly necessary c++ code you have to include in your application. This will create a QGuiApplication and a QQuickView instances and loads your main QML file, named as your target name.
