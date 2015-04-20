@@ -1,6 +1,6 @@
-[IONIC](http://ionicframework.com/) is a HTML5 mobile application development framework which helps in building native looking apps. It is mainly focused on creating a nice looking UI for the app using web technologies such as HTML, CSS and JavaScript. IONIC requires JavaScript framework, AngularJS to drive it's many features like gestures, animations etc.
+[IONIC](http://ionicframework.com/) is a HTML5 mobile application development framework which helps developers build native looking apps. It is mainly focused on creating a nice looking UI using web technologies such as HTML, CSS and JavaScript. It requires JavaScript framework and AngularJS to drive it's many features like gestures and animations.
 
-In this tutorial, we'll create a simple Bucket List application using IONIC framework. User would be able to sign up, sign in and create his wish list in the Bucket list app. We'll use [Firebase](https://www.firebase.com/) as back end for our Bucket List application. 
+Bucket lists have grown in popularity since the release of the film [The Bucket List](http://www.imdb.com/title/tt0825232/) starring Morgan Freeman and Jack Nicholson. In response, app developers have been creating apps which enable users to make their own 'bucket lists'- a list of things they wish to experience before they die. In Part One of this two part  tutorial, we'll create  the framework for a simple Bucket List application using the IONIC framework. This will enable you to create a home page which will users to sign up to the Bucket list app and sign in. We'll use [Firebase](https://www.firebase.com/) as back end for our Bucket List application. Part two will show you how to create a platform for a wish list in the Bucket list app. 
 
 Source code from this tutorial is available on [GitHub](https://github.com/jay3dec/iBucketListApp_Part1).
 
@@ -40,12 +40,11 @@ If you have a look at the project structure, you can see that inside the project
 
 As you can see, inside `www/js` there is a file called `app.js` which is the root file of our app. We'll define our application routes inside `app.js`. Inside `index.html`, we'll define the `ion-nav-view` where we'll render different templates.
 
-Now, making changes each time and running the app on the emulator is a time consuming task. So we'll use the browser to test our app and when finally it's ready, we'll try it on the android emulator.
-To make it work with the browser we'll need to install the required `package.json` dependencies using `npm`. So inside the iBucketApp directory, run the following command to install dependencies.
+Making edits and running the app on the emulator is a time consuming task. So we'll use the browser to test our app and when it's ready, we'll try it on the android emulator. To make it work with the browser we'll need to install the required `package.json` dependencies using `npm`. So inside the iBucketApp directory, run the following command to install dependencies.
 ```
 npm install
 ``` 
-IONIC provides command line utilities to make app development and testing easier. Once such command is `ionic serve`. Once dependencies are installed, run `ionic serve` and you should able to view the app running in the web browser.
+IONIC provides command line utilities to make app development and testing easier. Once such command is `ionic serve`. Once dependencies are installed, run `ionic serve` and you should able to view the app in the web browser.
 
 ![IONIC Blank Starter App](https://lh6.googleusercontent.com/-FoVHOh9mgEo/VSkZMAgQJaI/AAAAAAAABDo/oGxL38tAou0/w741-h567-no/as8a8s7a87s.png)
 
@@ -61,13 +60,13 @@ Remove all the code from the `index.html` body tag. Add the `ion-nav-view` direc
 </body>
 ```
 As per the url requested, we'll render different views inside the `ion-nav-view` in `index.html`. 
-[ion-view](http://ionicframework.com/docs/api/directive/ionView/) is another IONIC directive API which is the child of `ion-nav-view`.  It's a container for the view content. Now, open `templates/home.html` and add a ion-view with a header tag.
+[ion-view](http://ionicframework.com/docs/api/directive/ionView/) is another IONIC directive API which is the child of `ion-nav-view`.  It's a container which holds the view content. Now, open `templates/home.html` and add a ion-view with a header tag.
 ```
 <ion-view>
      <h1>This is Home Template</h1>
 </ion-view>
 ``` 
-The template and containers are all ready. Now, we need to define the routes and their respective views. We'll make use of [angular-ui-router](https://github.com/angular-ui/ui-router). So, open up `js/app.js` and define the`home` state.
+The template and containers are ready. Now we need to define the routes and their respective views. We'll make use of [angular-ui-router](https://github.com/angular-ui/ui-router). So, open up `js/app.js` and define the`home` state.
 ```
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -104,7 +103,7 @@ Save the above changes and you should be able to see the changes in the browser.
 
 ![Home Page View](https://lh3.googleusercontent.com/--epzSKEdPOU/VSkgLJlzWTI/AAAAAAAABEA/RgUbcMOmrbk/w698-h567-no/lapslas9a8s.png)
 
-Next, let's modify the `home.html` template to give it a feel good look. We'll start by adding a header to our app. Adding a header requires us to add the `ion-nav-bar` to the `index.html` page.
+Next, let's modify the `home.html` template. We'll start by adding a header to our app. Adding a header requires us to add the `ion-nav-bar` to the `index.html` page.
 ```
 <ion-nav-bar class="bar-positive">
 </ion-nav-bar>
@@ -131,11 +130,11 @@ The title of the ion-view passed would display the header in the `ion-nav-bar`. 
 </ion-view>
 ```
 
-Save the changes and you should be able to view the sign in form in the home page.
+Save the changes and you should be able to view the sign in form on the home page.
 
 ![Sign In Form in Home Page](https://lh6.googleusercontent.com/-uVotiEOZ4cE/VSkkAY9sa7I/AAAAAAAABEc/aijXW5pe5OA/w700-h500-no/77ys7syd7sd.png)
 
-It seems like the Sign In button is a bit too much stretched. Let's add some padding to it's container. Inside css/style.css, add a style:
+It seems like the Sign In button is a bit too stretched. Let's add some padding to it's container. Inside css/style.css, add a style:
 ```
 .padding{
 	padding: 10px;
@@ -154,7 +153,7 @@ Save the changes and you should be able view the new sign in form.
 ![SignIn Page](https://lh5.googleusercontent.com/-QXKOmYEOHDA/VSklTXlHCvI/AAAAAAAABEs/Jk_BZqqBS0I/s567-no/alpala0a09aa.png)
 
 ## Implementing Sign In Functionality
-We'll be using Firebase as back end for our Bucket list app. Register on [Firebase](https://www.firebase.com/) if you already don't have an account. Once registered you should be having the Firebase URL. Here is my firebase URL:
+We'll be using Firebase as back end for our Bucket list app. Register on [Firebase](https://www.firebase.com/) if you don't have an account already. Once registered you should have your own Firebase URL. Here is my firebase URL:
 ```
 https://burning-fire-1723.firebaseio.com
 ```
@@ -200,7 +199,7 @@ $scope.signin = function() {
     console.log(username, password);
 }
 ```
-Save the changes and try to sign in after entering the username and password. If all goes good, you should be able to see the username and password in the browser console.
+Save the changes and try to sign in after entering the username and password. If all goes well you should be able to see the username and password in the browser console.
 
 Next, we'll try to authenticate against a user in Firebase. In order to make it work, first we'll create a `Firebase` object using the Firebase URL.
 ```
@@ -306,11 +305,11 @@ loginObj.$authWithPassword({
     });
 ```
 
-Save the changes and try to sign in using username `sam@sam.com` and password `sam`. On successful authentication user would be redirected to the user home page.
+Save the changes and try to sign in using username `sam@sam.com` and password `sam`. On successful authentication you will be redirected to the user home page.
 
 ![iBucket List App Screens](https://lh5.googleusercontent.com/U73vsY0AUZcihAhpE6wmFEw4_rwezKPdG1pwdcON_4Y=w900-h500-no)
 
 ## Wrapping It Up
-In this part of the tutorial, we saw how to get started with creating a simple Bucket List app using IONIC framework and Firebase. In this tutorial, we implemented the sign in form and user home page. 
+In this tutorial, we learnt how to get started with creating a simple Bucket List app using IONIC framework and Firebase,  developing the sign in and sign up forms and user home page. 
 
-In this next part, we'll implement the sign up functionality for the bucket list app. Do let us know your thoughts, suggestions or any corrections in the comments below.
+In this next tutorial, we'll implement the sign up functionality for the bucket list app. Do let us know your thoughts, suggestions or any corrections in the comments below.
