@@ -1,6 +1,8 @@
-Bucket lists have grown in popularity since the release of the film [The Bucket List](http://www.imdb.com/title/tt0825232/) starring Morgan Freeman and Jack Nicholson. In response, app developers have been creating apps which enable users to make their own 'bucket lists'- a list of things they wish to experience before they die. In Part One of this two part  tutorial, we'll create  the framework for a simple Bucket List application using the IONIC framework. This will enable you to create a home page which will users to sign up to the Bucket list app and sign in. We'll use [Firebase](https://www.firebase.com/) as back end for our Bucket List application. Part two will show you how to create a platform for a wish list in the Bucket list app. 
+Bucket lists have grown in popularity since the release of the film [The Bucket List](http://www.imdb.com/title/tt0825232/) starring Morgan Freeman and Jack Nicholson. In response, app developers have been creating apps which enable users to make their own 'bucket lists'- a list of things they wish to experience before they die. In Part One of this two-part  tutorial, we'll create  the framework for a simple Bucket List application using the IONIC framework. This will enable you to create a home page which will enable users to sign up to the Bucket list app and sign in. We'll use [Firebase](https://www.firebase.com/) as back end for our Bucket List application. 
 
 [IONIC](http://ionicframework.com/) is a HTML5 mobile application development framework which helps developers build native looking apps. It is mainly focused on creating a nice looking UI using web technologies such as HTML, CSS and JavaScript. It requires JavaScript framework and AngularJS to drive it's many features like gestures and animations.
+
+Part two will show you how to create a platform for a wish list in the Bucket list app. 
 
 Source code from this tutorial is available on [GitHub](https://github.com/jay3dec/iBucketListApp_Part1).
 
