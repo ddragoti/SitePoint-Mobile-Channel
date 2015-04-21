@@ -21,68 +21,68 @@ Go on clicking next again, fill in your project description, click next and choo
 
 The project is now ready. The entry point of your app will be the "src/yourappname.cpp":
 
-`
-	int main(int argc, char *argv[])
+```javascript
+int main(int argc, char *argv[])
 	{
- 
-     return SailfishApp::main(argc, argv);
+		return SailfishApp::main(argc, argv);
 	}
 
-`
+```
 
 This is the only strictly necessary c++ code you have to include in your application. This will create a QGuiApplication and a QQuickView instances and loads your main QML file, named as your target name.
 Sailfish UI use the QML language, that is a JavaScript-based, declarative language for designing user interface–centric applications. It is part of the QT Framework.
 So have a look at the QML file named qml/yourappname.qml:
 
-`
+```javascript
+
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
-`
+```
 
 The first two lines will import Qt Quick And Sailfish Silica modules, but we will talk about those later.
 The last import loads all the QML file in the pages subdirectory, and they will be made avaiable in our qml/yourappname.qml file.
 
-`
+```javascript
 ApplicationWindow
 {
     initialPage: Component { FirstPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
 }
-`
+```
 
 The ApplicationWindow is the top-level element of all Sailfish Silica app. It set up the initial page show when the app starts and also define the Cover to be displayed when app is pushed in the background.
 QML Objects are specified by their type, followed by a pair of braces. Object types always begin with a capital letter. A list of the basic QML Elements can be found [here](http://qt.apidoc.info/4.8.5/qmlbasicelements.html) and the Sailfish specific element, called Silica components, is listed in the SDK documentation (_Help→Contents→Sailfish Silica Reference Documentation_) 
 The qml/pages/FirstPage.qml contains a single Page to be displayed:
 
-`
+```javascript
 Page {
     id: page
-`
+```
 Page object, a simple container for our contents. We can define the id property with a name of our choice, and use it every time we need to refer the object. It can be defined for all the QML objects.
 
-`
+```javascript
     SilicaFlickable {
         anchors.fill: parent
-`
+```
 
 
 The first child of the Page element it's a SilicaFlickable. This is an element that places its children on a surface that can be dragged and flicked. You can use [anchors](http://doc.qt.io/qt-5/qtquick-positioning-anchors.html) to align and placing element in relation of each other.
 The flickable is needed in order to use the next element, a pulley menu, that's is one of the key element in the Sailfish UI. 
 A pulley menu is an extension of a page, it can be placed at the top or bottom and it revealed when user moves the content, freeing the user from the need to reach the top or the bottom of the screen to select a menu item. Adding a pullery menu it's straightforward:
 
-`
+```javascript
         PullDownMenu {
             MenuItem {
                 text: qsTr("Show Page 2")
                 onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"))
             }
         }
-`
+```
 A pulley menu always needs to be a child of a flickable element ( SilicaFlickable, SilicaListView, or SilicaGridView ). We can define multiple MenuItem but guidelines suggest to do not exeed five elements.
 In the code above we attach an action to the onClicked event, using the pageStack object to push SecondPage.qml to the view.
 
-`
+```javascript
 	Column {
             id: column
 
@@ -98,13 +98,14 @@ In the code above we attach an action to the onClicked event, using the pageStac
                 font.pixelSize: Theme.fontSizeExtraLarge
             }
         }
-`
+```
 The Column element positions its child vertically making them not overlapping. 
 The PageHeader elements define the title displayed on the top of the content and the Label, it's just a label.
 Notice how spacing, font size and color are defined using the Theme object. In this way it's not needed to hardcode nothing, and I will be sure that my app will scale good on different device, and text will be easy to read on any ambience users will choose. 
 
 Now open the qml/cover/CoverPage.qml file. 
-`
+
+```javascript
 CoverBackground {
     Label {
         id: label
@@ -122,8 +123,9 @@ CoverBackground {
         CoverAction {
             iconSource: "image://theme/icon-cover-pause"
         }
-    }
-	`
+}
+```
+
 Covers in Sailfish is the visual rapresentations of background application, and they are displayed on the running applications screen ( think about the Android task switcher).
 In this example the Cover display a Label and provide two coverAction that allow user to interact with our application, even if it will be in background.
 The onTriggered event is fired whenever a cover action is activated but is not used in this example.
