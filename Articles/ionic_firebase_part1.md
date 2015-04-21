@@ -1,8 +1,8 @@
 # Creating a Bucket List Application with the Ionic Framework
 
-'Bucket lists' (a list of things to experience before death) have always been a popular list for people to maintain. Helped in part by the release of the film [The Bucket List](http://www.imdb.com/title/tt0825232/) starring Morgan Freeman and Jack Nicholson.
+'Bucket lists' (a list of things to experience before death) have always been a popular list for people to maintain.
 
-In Part One of this two-part tutorial, we'll create the framework for a simple Bucket List application using the IONIC framework. This will create a home page that enables users to sign up to the Bucket list app and sign in. We'll use [Firebase](https://www.firebase.com/) as a back end for our Bucket List application.
+In Part One of this tutorial, we'll create the basis for a simple Bucket List application using the IONIC framework. This will create a home page that enables users to sign up to the Bucket list app and sign in. We'll use [Firebase](https://www.firebase.com/) as a back end for our Bucket List application.
 
 [IONIC](http://ionicframework.com/) is a HTML5 mobile application development framework which helps developers build native looking apps. It is mainly focused on creating an attractive UI using web technologies such as HTML5, CSS and JavaScript. It requires AngularJS to drive it's many features like gestures and animations.
 
@@ -11,7 +11,7 @@ Part two will show how to create a platform for a wish list in the Bucket list a
 Source code from this tutorial is available on [GitHub](https://github.com/sitepoint-editors/iBucketListApp_Part1).
 
 ## Getting Started
-Start by installing [Node.js](https://nodejs.org/) if you don't have it already also install the node package manager _npm_.
+Start by installing [Node.js](https://nodejs.org/) if you don't have it already, also install the node package manager _npm_.
 
 Use npm to install IONIC.
 
@@ -72,7 +72,7 @@ Remove all the code inside the _index.html_ `body` tag. Add the `ion-nav-view` d
 
 As per the url requested, we'll render different views inside the `ion-nav-view` in _index.html_. The [ion-view](http://ionicframework.com/docs/api/directive/ionView/) directive is another IONIC directive API which is the child of `ion-nav-view`.  It's a container which holds the view content. Open _templates/home.html_ and add a ion-view with a header tag.
 
-```
+```html
 <ion-view>
      <h1>This is Home Template</h1>
 </ion-view>
@@ -80,7 +80,7 @@ As per the url requested, we'll render different views inside the `ion-nav-view`
 
 The template and containers are ready. Now we need to define the routes and their respective views. We'll make use of [angular-ui-router](https://github.com/angular-ui/ui-router). Open _js/app.js_ and define the `home` state.
 
-```
+```javascript
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('home', {
@@ -98,7 +98,7 @@ In the above code, we have defined the template and controller for the url `/hom
 
 Create a file called _js/controller.js_ and define the `HomeCtrl` inside it.
 
-```
+```javascript
 angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', ['$scope', function($scope) {
