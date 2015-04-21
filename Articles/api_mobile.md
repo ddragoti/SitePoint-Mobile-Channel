@@ -1,46 +1,52 @@
 # Building a simple REST API for mobile applications
+
 ## What is REST?
+REST or Representational State Transfer is lightweight, HTTP based and runs on the same web servers web sites run on. Instead of delivering in HTML (a combination of presentation and data), it delivers data minimally with separators and delimiters (like JSON).  It's an architectural style for designing networked applications and a different way of delivering web services.  
+REST is browsable so it helps developers modify and check the preciseness of their code, as only the data is displayed. It is a safer way of providing services or data access as it does not expose unnecessary surface area of the database used by the website.  Some more well-known REST apis are from [Twitter](https://dev.twitter.com/rest/public) and [Facebook Graph](https://developers.facebook.com/docs/graph-api).
 
-REST or Representational State Transfer is lightweight, HTTP based and built on web servers not unlike how normal web sites are built on the backend.  Instead of delivering in HTML (a combination of presentation and data), we deliver data with a minimum number of separators and delimiters (like JSON).  It's an architectural style for designing networked applications and a different way of delivering web services.  REST is browsable so it really helps developers modify and check the preciseness of their code, as only the data is displayed on the website.  It is also a safer way of providing services or data access as it does not expose too much unnecessary surface area of the database used by the website.  Some more well-known REST apis are from [Twitter](https://dev.twitter.com/rest/public)  and [Facebook Graph](https://developers.facebook.com/docs/graph-api). 
+REST is platform and language independent, although I recommend using PHP, Python or Ruby. There are four commonly defined methods used in REST architecture: the _create_, _read_, _update_ and _delete_ methods. We can add other more specialist methods like getting 'the top ten most popular items' or 'the highscore of all users' either by writing a new method or using a query parameter like `/api/items?top=10`.
 
-REST is platform and language independent, although I recommend using PHP, Python or Ruby. There are four commonly defined methods used in a REST architecture: the create, read, update and delete methods. We can also add other more specialist methods like getting 'the top ten most popular items' or 'the highscore of all users' either by writing a new method or using a query parameter like `/api/items?top=10`.
- 
 ## HTTP Methods and API endpoints
 
-You might remember using the GET and POST requests when creating web forms (synchronous) or ajax requests (asynchronous). You’ve probably used PHP, Python or any other language to process form data. Through doing these things, you have indeed written your own simple REST framework.
+You might remember using the GET and POST requests when creating web forms (synchronous) or ajax requests (asynchronous). You’ve probably used PHP, Python or any other language to process form data. Through doing these things, you have  written your own simple REST framework.
 
-POST, GET, PUT,  DELETE correspond to create, read, update, delete (CRUD) and are also related to the most basic of database operations. API endpoints describe available operations on exposed data. Think of it as urls that provide data (GET request) or an url where you can submit data to (POST request).
+POST, GET, PUT, DELETE correspond to create, read, update, delete (CRUD) and are  related to the most basic of database operations. API endpoints describe available operations on exposed data. Think of it as urls that provide data (GET request) or an url where you can submit data to (POST request).
 
-There are many data formats we could use but the more common ones are JSON and XML.
-GET /api/boats/123456 will return data on the boat with id 123456 even when applied multiple times.
+There are many data formats we could use but the more common are JSON and XML.
 
 ## Using djangorest framework to build a simple REST api
 
-Now I'm going to walk you through how to build a simple REST api using the Django (Python MVC) and django REST framework to  access data inside a database (just one table).  Django REST framework is built using django (python) specifically for exposing data via the REST framework.  
+I'm going to demonstrate how to build a simple REST api using the Django (Python MVC) and Django REST framework to  access data inside a database (just one table).  Django REST framework is built using Django (python) specifically for exposing data via the REST framework.  
 
-Here are the steps and code to create model and views.  For ease of entering data, we will input them using the existing Django admin page:
+Below are the steps and code to create the model and views. For ease of entering data, we will input them using the existing Django admin page.
 
-To start off, you will need to have already installed Python >v2.7 and Django v1.7.4 on your system.  If you have not, please install [Python](http://www.python.org/download/) and [Django](https://www.djangoproject.com/download/).
+To begin, you will need to have Python >v2.7 and Django v1.7.4 on your system.  If not, install [Python](http://www.python.org/download/) and [Django](https://www.djangoproject.com/download/) first.
 
-You can easily test your installation by firing up your command line, and type the `python` command.  You should see 
-```bash
-Python 2.7.6 (default, Nov 18 2013, 15:12:51) 
+You can test your installation by opening the command line, and typing the `python` command. You should see something like:
+
+```
+Python 2.7.6 (default, Nov 18 2013, 15:12:51)
 [GCC 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
->>> 
+>>>
 ```
-and in the Python prompt, continue by typing
-```bash
+
+At the Python prompt, type:
+
+```
 >>> import django
 >>> print(django.get_version())
-1.7.4
 ```
-This verifies that you have set up Django 1.7.4 on your system.  Next, we build the Django project.
-```bash
-$ django-admin.py startproject marine
+
+This will output a version number and verifies that you have set up Django on your system. Exit out of the Python prompt and build the Django project.
+
 ```
-and this is the list of files and folders created.
-```bash
+django-admin.py startproject marine
+```
+
+This is the list of files and folders that should be created.
+
+```
 marine/
     manage.py
     marine/
@@ -49,12 +55,16 @@ marine/
         urls.py
         wsgi.py
 ```
-You can check if everything works as expected by executing
-```bash
-$ python manage.py runserver
+
+Check if everything works by executing:
+
 ```
-which actually starts the Django development webserver for testing.  When successful, you will get
-```bash
+python manage.py runserver
+```
+
+This starts the Django development webserver for testing. If successful, you will see something like:
+
+```
 Performing system checks...
 
 0 errors found
@@ -63,14 +73,18 @@ Django version 1.7.4, using settings 'mysite.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
-and if you browse to the URL http://127.0.0.1:8000/ you will see a placeholder website that convinces you that you have done everything correctly so far.
 
-So now you have created the bare skeleton of the site. Now we will build an app (just a container) which houses a model (as in Model-View-Controller).  A model is the source of data for your app.  You can refer to more information about how to use models properly on the django website or any other MVC site.
+If you open the URL http://127.0.0.1:8000, you will see a placeholder website to show that everything is correct so far.
+
+Now we will build an app (just a container) which houses a model (as in Model-View-Controller). A model is the source of data for your app. You can find more information about how to use models on the Django website or any other MVC related site.
+
 ```
-$ python manage.py startapp fishes
+python manage.py startapp fishes
 ```
-and you would get the following files
-```bash
+
+Should result in the following files:
+
+```
 fishes/
     __init__.py
     admin.py
@@ -80,33 +94,48 @@ fishes/
     tests.py
     views.py
 ```
-Inside the `models.py` file, there is only the import line `from django.db import models`.  Add the following code to it.
+
+Currently inside the `models.py` file is only the import line `from django.db import models`.  Add the following code.
+
 ```python
     class Fish(models.Model):
         name = models.CharField(max_length=255)
         created = models.DateTimeField('auto_now_add=True')
         active = models.BooleanField()
 ```
-This creates a class that exposes the name, created date of the fish and if the data row is active or not.  You can change the field type by refering to https://docs.djangoproject.com/en/1.7/ref/models/fields/#field-types . 
-Now we add the fishes app to the `marine/settings.py` file to register it.  Under `INSTALLED_APPS`, add `fishes` to the list.  Go back and run `python manage.py sql fishes` to get a preview of the database schema SQL that will run when we activate this app.  To confirm creating the relevant tables on the default sqlite database, type `python manage.py migrate` or `python manage.py syncdb` on older Django versions.
 
-Now you have an empty `fish` table in your database and the model contains nothing.  Luckily Django provides a built-in admin page that lets you quickly insert and modify data.  In the command prompt, type
-```bash
-$ python manage.py createsuperuser
-```
-and follow the instructions to create an administrator's account.  You will use this account to log into the admin page.  Start the development server if you have not done so with
-```bash
-$ python manage.py runserver
-```
-and enter your username and password.  You should see a admin page with the `Marine` list.  Click on `Fishes` to add or modify data.  Add some data to it.
+This creates a class that exposes the name, created date of the fish and if the data row is active or not. Learn more about field types in [the Django documentation](https://docs.djangoproject.com/en/1.7/ref/models/fields/#field-types).
 
-Up to this point, you have built a working, albeit plain, Django website.  We will now incorporate Django REST framework to the site by downloading and installing it from http://www.django-rest-framework.org/#installation .  One key thing to remember is to add `rest_framework` into the `INSTALLED_APPS` list in `marine/settings.py` and add:
+To register the fishes app, add it to the `marine/settings.py` file. Do this by adding `fishes` to the list under `INSTALLED_APPS`.
+
+At this point, configure your database settings in `settings.py`, for this example you can use the default sqlite settings:
+
+Run `python manage.py sql fishes` to get a preview of the database schema SQL that will run when we activate this app.  To confirm creating the relevant tables on the default sqlite database, type `python manage.py migrate` or `python manage.py syncdb` on older Django versions.
+
+Now you have an empty `fish` table in your database and the model contains nothing. Luckily Django provides a built-in admin page that lets you quickly insert and modify data.  At the command prompt, type:
+
+```bash
+python manage.py createsuperuser
+```
+
+and follow the instructions to create an administrator's account.  You will use this account to log into the admin page.  Start the development server if you have not done so already with:
+
+```bash
+python manage.py runserver
+```
+
+Enter your username and password.  You should see a admin page with the _Marine_ list.  Click on _Fishes_ to add or modify data, add some data to it.
+
+Up to this point, you have built a working, albeit plain, Django website.  We will now the incorporate Django REST framework to the site by downloading and installing it. [Find out how to do that here](http://www.django-rest-framework.org/#installation).  One key thing to remember is to add `rest_framework` into the `INSTALLED_APPS` list in `marine/settings.py` and add:
+
 ```python
 url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ```
-to the `urls.py` file under the folder `marine`.
 
-When we installed Django REST framework, it gave us the ability to use serializers, which basically flatten the data obtained from the fish model into string format, either XML or JSON.  To create a serializer for the fish model, we create a file under the `fishes` folder and call it `serializers.py`.  Here are the contents:
+To the `urls.py` file in the _marine_ folder.
+
+When we installed the Django REST framework, it gave us the ability to use serializers, which flattens the data obtained from the fish model into a string format, either XML or JSON.  To create a serializer for the fish model, we create a file under the _fishes_ folder and call it `serializers.py`.  Add the following code to it:
+
 ```python
 from fish.models import Fish
 from rest_framework import serializers
@@ -116,7 +145,9 @@ class FishSerializer(serializers.HyperlinkedModelSerializer):
         model = Media
         fields = ('name', 'active', 'created')
 ```
-and in the `views.py` file, add:
+
+And in the `views.py` file, add:
+
 ```python
 from rest_framework import viewsets
 from fishes.serializers import FishSerializer
@@ -124,7 +155,8 @@ class FishViewSet(viewsets.ModelViewSet)
     serializer_class = FishSerializer
 ```
 
-Now if you go to http://127.0.0.1/api/fishes/ you will get the browsable API.
+If you now open _http://127.0.0.1:8000/api/fishes/_ you will see a browsable API.
+
 ```javascript
 HTTP 200 OK
 Content-Type: application/json
@@ -133,16 +165,16 @@ Allow: GET, POST, HEAD, OPTIONS
 
 [
     {
-        "name": "Dory", 
-        "created": "2014-06-21T04:23:01.639Z", 
+        "name": "Dory",
+        "created": "2014-06-21T04:23:01.639Z",
     },
     {
-        "name": "Angel", 
-        "created": "2014-07-21T04:23:01.639Z", 
+        "name": "Angel",
+        "created": "2014-07-21T04:23:01.639Z",
     },
     {
-        "name": "Clown", 
-        "created": "2014-08-21T04:23:01.639Z", 
+        "name": "Clown",
+        "created": "2014-08-21T04:23:01.639Z",
     }
 ]
 ```
@@ -210,12 +242,12 @@ Next we need a way to obtain JSON from the REST api we published using django RE
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] ];
     NSError *jsonError = nil;
     NSHTTPURLResponse *jsonResponse = nil;
-    
+
     NSData *response;
     do {
         response = [NSURLConnection sendSynchronousRequest:request returningResponse:&jsonResponse error:&jsonError];
     } while ([jsonError domain] == NSURLErrorDomain);
-    
+
     if([jsonResponse statusCode] != 200) {
         NSLog(@"%ld", (long)[jsonResponse statusCode]);
     } else {
