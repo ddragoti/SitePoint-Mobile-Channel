@@ -181,28 +181,29 @@ Allow: GET, POST, HEAD, OPTIONS
 
 ## The iOS mobile app
 
-Here I will detail the key steps required to create a mobile app that receives data from our API.  We are going to use the UI Table View to display our data in a list.  In XCode 6, create a new project:
+Here I will detail the key steps required to create a mobile app that receives data from our API.  We are going to use the `UITableView` to display our data in a list. In XCode 6, create a new project:
 
-File > New > Project > iOS Application > Single View Application
+_File > New > Project > iOS Application > Single View Application_
 
-Product Name: Fishes
+_Product Name: Fishes
 Language: Objective-C
 Devices: iPhone
-we do not use Core Data for now.
+We wont use Core Data for now.
+_
 
-Select a location on disk to save your project and then click Create.
+Select a location on disk to save your project and click Create.
 
-By default, the project will be created with a View Controller.  We will however, want to show the data from the REST api as a list, so we will use the Table View Controller instead.  So we will create a new set Objective-C files (File > New > File > iOS Source > Cocoa Touch Class).
+By default, the project will be created with a View Controller. However, we want to show the data from the REST api as a list, so we will use the Table View Controller instead. Create a new set of Objective-C files (_File > New > File > iOS Source > Cocoa Touch Class_).
 
-Class: TableViewController
+_Class: TableViewController
 Subclass of: UITableViewController
-we do not create a XIB file
+We do not need a XIB file_
 
-You have just created the TableViewController.h and TableViewController.m files.
+You have just created the _TableViewController.h_ and _TableViewController.m_ files.
 
-Go to the Main.storyboard, go to the Object library and drag the Table View Controller to the storyboard.  Select and delete the default View Controller.  Make sure that under Attributes Inspector, the checkbox for `Is Initial View Controller` for the selected Table View Controller is ticked.
+Open the _Main.storyboard_ file, from the Object library drag a Table View Controller to the storyboard.  Select and delete the default View Controller.  Make sure that under Attributes Inspector, the checkbox for _Is Initial View Controller_ for the selected Table View Controller is ticked.
 
-In the Main.storyboard, expand the Table View Controller to expose Table View Cell then select the Attributes Inspector and enter FishCell in the Identifier.  Also change the Style to Subtitle from Basic.  This provides the utility to display the value set by `cell.detailTextLabel`.  This code below demonstrates the use of a simple NSArray to display data hardcoded in the UITableView.
+In the _Main.storyboard_, expand the Table View Controller to expose the Table View Cell, select it in the Attributes Inspector and enter _FishCell_ as the Identifier.  Change the Style from _Basic_ to _Subtitle_.  This provides the ability to display the value set by `cell.detailTextLabel`. The code below demonstrates the use of a simple `NSArray` to display data hardcoded in the `UITableView`.
 
 ```objectivec
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
