@@ -191,7 +191,7 @@ Allow: GET, POST, HEAD, OPTIONS
 ]
 ```
 
-Included is the [REST API](https://github.com/quiksilv/simple-api-mobile/tree/master/restapi "REST API") sourcecode hosted on github.  There is no data so you would need to run `python manage.py migrate` or `python manage.py syncdb` on older Django versions.
+Included in the article is the [REST API](https://github.com/quiksilv/simple-api-mobile/tree/master/restapi "REST API") sourcecode hosted on github.  There is no data so you would need to run `python manage.py migrate` or `python manage.py syncdb` on older Django versions.
 
 ## The iOS mobile app
 
@@ -199,24 +199,24 @@ I will go through the key steps required to create a mobile app that receives da
 
 File > New > Project > iOS Application > Single View Application
 
-Product Name: Fishes
-Language: Objective-C
-Devices: iPhone
-I am not using Core Data for now.
+* Product Name: Fishes
+* Language: Objective-C
+* Devices: iPhone
+* Not using Core Data for now.
 
 Select a location on disk to save your project and then click Create.
 
 By default, the project will be created with a View Controller.  I however will want to show the data from the REST API as a list, so we will use the Table View Controller instead.  So we will create a new set Objective-C files (File > New > File > iOS Source > Cocoa Touch Class).
 
-Class: TableViewController
-Subclass of: UITableViewController
+Class: `TableViewController`
+Subclass of: `UITableViewController`
 we do not create a XIB file
 
-You have just created the TableViewController.h and TableViewController.m files.
+You have just created the `TableViewController.h` and `TableViewController.m` files.
 
-Go to the Main.storyboard, go to the Object library and drag the Table View Controller to the storyboard.  Select and delete the default View Controller.  Make sure that under Attributes Inspector, the checkbox for `Is Initial View Controller` for the selected Table View Controller is ticked.
+Go to the `Main.storyboard`, go to the Object library and drag the Table View Controller to the storyboard.  Select and delete the default View Controller.  Make sure that under Attributes Inspector, the checkbox for `Is Initial View Controller` for the selected Table View Controller is ticked.
 
-In the Main.storyboard, expand the Table View Controller to expose Table View Cell then select the Attributes Inspector and enter FishCell in the Identifier.  Also change the Style to Subtitle from Basic.  This provides the utility to display the value set by `cell.detailTextLabel`.  This code below demonstrates the use of a simple NSArray to display data hardcoded in the UITableView.
+In the `Main.storyboard`, expand the Table View Controller to expose Table View Cell then select the Attributes Inspector and enter FishCell in the Identifier.  Also change the Style to Subtitle from Basic.  This provides the utility to display the value set by `cell.detailTextLabel`.  This code below demonstrates the use of a simple NSArray to display data hardcoded in the UITableView.
 
 ```objectivec
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -242,7 +242,7 @@ In the Main.storyboard, expand the Table View Controller to expose Table View Ce
     return cell;
 }
 ```
-Next we need a way to obtain JSON from the REST api we published using djangorestframework.  I first establish an NSArray object called `fishJson` by registering it in the @interface level and synthesizing it with `@property` and `@synthesize`.  This replaces the codes for the setters and getters.  I then replace the code we had in the `numberOfRowsInSection`, where we change `fishes` with `fishJson` which contain the JSON we downloaded from the REST api.
+Next we need a way to obtain JSON from the REST api we published using djangorestframework.  I first establish an NSArray object called `fishJson` by registering it in the @interface level and synthesizing it with `@property` and `@synthesize`.  This replaces the codes for the setters and getters.  I then replace the code we had in the `numberOfRowsInSection`, where I change `fishes` with `fishJson` which contain the JSON we downloaded from the REST API.
 ```objectivec
 @interface TableViewController ()
 @property (strong) NSArray *fishJson;
@@ -277,7 +277,7 @@ Next we need a way to obtain JSON from the REST api we published using djangores
     }
 }
 ```
-Also, we update the method numberOfRowsInSection.  The code makes sure that the number of rows matches the number of elements as contained in the fishJson array.
+Also, we update the method `numberOfRowsInSection`.  The code makes sure that the number of rows matches the number of elements as contained in the `fishJson` array.
 ```objectivec
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
@@ -285,4 +285,4 @@ Also, we update the method numberOfRowsInSection.  The code makes sure that the 
     return [fishJson count];
 }
 ```
-Now you have a working simple mobile app to display data obtained from an online or local REST api.  To run the mobile app on the iOS simulator, go to Product then Run.  If you have problems getting the iOS code error free, you can download it [here](https://github.com/quiksilv/simple-api-mobile/tree/master/iphoneapp "iPhone code").
+Now you have a working simple mobile app to display data obtained from an online or local REST API.  To run the mobile app on the iOS simulator, go to Product then Run.  If you have problems getting the iOS code error free, you can download it [here](https://github.com/quiksilv/simple-api-mobile/tree/master/iphoneapp "iPhone code").
