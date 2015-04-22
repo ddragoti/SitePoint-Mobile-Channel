@@ -1,4 +1,4 @@
-# Building a simple REST API for mobile applications
+# Building simple REST API for mobile applications
 ## What is REST?
 
 Representational State Transfer (REST) is lightweight HTTP based and built on web servers much like how normal web sites are build on the backend.  Instead of delivering in HTML, which is a combination of presentation and data, we would display only data with a minimum number of formatting using separators and delimiters (like JSON).  One can think of it as just an architectural style for designing networked applications or as a different way of delivering web services.  REST is also browsable so it really helps developers modify and check the correctness of their code as only the data is displayed on the browser.  It is also a safer way of providing services or data access as it does not expose too much unnecessary surface area of the database used by the website.  Some more well-known REST apis are from [Twitter](https://dev.twitter.com/rest/public)  and [Facebook Graph](https://developers.facebook.com/docs/graph-api). 
