@@ -17,14 +17,29 @@ The SDK it's based on the QT Creator development environment, and a series of to
 
 
 It contains the Mer build engine for cross compilation, an Emulator and all the API documentation. Sailfish SDK is supported on Linux, OS X and Windows, so you have no excuse to not give it a try.
+
+
+
 You need to install [VirtualBox](http://www.virtualbox.org/) and then download the SDK for your platform avaialable [here](https://sailfishos.org/develop/).
 You can find detailed install instructions for each platform [here](https://sailfishos.org/develop/sdk-overview/develop-installation-article/), but everything should be smooth as double click on the installer file and click "Next" a couple of times.
 
+
+
+
 ![Sailfish OS Installer](0.png)
+
+
+
 
 The installation comes with everything pre-configured, so launch the Sailfish IDE and we are ready to start.
 
+
+
+
 ![QT Creator Environment](2.png)
+
+
+
 
 ### Creating a project
 After Qt creator has finished loading click on _File→New File_ or Project and select _Applications→SailfishOS_ Qt Quick Application.
@@ -37,7 +52,11 @@ After Qt creator has finished loading click on _File→New File_ or Project and 
 
 
 
-Now fill in your project name and choose the directory where it will be saved. If you plan to submit the application to the Jolla Harbour (this is the name of the Jolla developer portal), you should use a name like "harbour-myApplicationName". This will become the package name when the app is ready to ship.
+Now fill in your project name and choose the directory where it will be saved. If you plan to submit the application to the Jolla Harbour (this is the name of the Jolla developer portal), you should use a name like "harbour-myApplicationName".
+
+
+
+This will become the package name when the app is ready to ship.
 
 
 
@@ -85,8 +104,14 @@ int main(int argc, char *argv[])
 
 
 
-This is the only strictly necessary c++ code you have to include in the application. This will create a QGuiApplication and a QQuickView instances and loads the main QML file, named as your target name.
+This is the only strictly necessary c++ code you have to include in the application. It will create a QGuiApplication and a QQuickView instances and loads the main QML file, named as your target name.
+
+
+
 Sailfish UI use the QML language, that is a JavaScript-based, declarative language for designing user interface–centric applications. It is part of the QT Framework.
+
+
+
 Have a look now at the QML file named _qml/yourappname.qml_:
 
 
@@ -211,7 +236,10 @@ The PageHeader elements define the title displayed on the top of the content and
 
 
 
-Notice how spacing, font size and color are defined using the Theme object. In this way it's not needed to hardcode nothing, and I will be sure that my app will scale good on different device, and text will be easy to read on any ambiance users will choose. The Ambiance is a sort of "theme" in Sailfish but it also change the looks of every application, making those to match the colors/backgrounds etc. of the selected one.
+Notice how spacing, font size and color are defined using the Theme object. In this way it's not needed to hardcode nothing, and I will be sure that my app will scale good on different device, and text will be easy to read on any ambiance users will choose.
+
+
+The Ambiances is a sort of "theme" in Sailfish but it also change the looks of every application, making those to match the colors/backgrounds etc. of the selected one.
 
 
 
