@@ -146,7 +146,7 @@ There is quite a bit of code involved but they switch on API routing which is cr
 
 When we installed djangorestframework, it gave us the ability to use serializers, which basically flattens the data obtained from the fish model into string format, either XML or JSON.  To create a serializer for the fishes model, we create a file under the `fishes` folder and call it `serializers.py`.  Here are the contents.
 ```python
-from fish.models import Fish
+from fishes.models import Fish
 from rest_framework import serializers
 
 class FishSerializer(serializers.HyperlinkedModelSerializer):
