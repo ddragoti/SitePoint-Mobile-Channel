@@ -1,13 +1,11 @@
 ## Hello Sailfish
 ### Intro
-After Jolla won the last Mobile World Congress best tablet awards, interest in their operating system [SailfishOS] (https://sailfishos.org/) has grown.
+After [Jolla] (https://jolla.com/) won the last [Mobile World Congress best tablet awards],(https://identi.ca/jolla/image/gmyTYW_UTGW-uO4kiIObTw) interest in their operating system [SailfishOS] (https://sailfishos.org/) has rocketed.
 
-Sailfish is a modern and secure operating system built on top of the [Mer open source project], (http://merproject.org/) so it's like a classic Linux distribution with the great addition of the Jolla crafted Sailfish UI. There's no buttons on Sailfish devices, everything is handled with simple gestures, supported by an appealing design style. It's a really interesting platform, for both users and developers.
-
-In this article I'll show you how easy it is to develop on this new and promising platform.
+Sailfish is a modern and secure operating system built on top of the [Mer open source project](http://merproject.org/) so it's like a classic Linux distribution with the great addition of the Jolla crafted Sailfish UI. There's no buttons on Sailfish devices, everything is handled with simple gestures, supported by an appealing design style. It's a really interesting platform, for both users and developers. In this article I'll show you how easy it is to develop on this new and promising platform.
 
 ### Developer environment set up
-The SDK is based on the QT Creator development environmen and a series of tools are available to build and test applications. It contains the Mer build engine for cross compilation, an Emulator and all the API documentation. Sailfish SDK is supported on Linux, OS X and Windows, so you have no excuse to not give it a try.
+The SDK is based on the QT Creator development environment and a series of tools are available to build and test applications. It contains the Mer build engine for cross compilation, an Emulator and all the API documentation. Sailfish SDK is supported on Linux, OS X and Windows, so you have no excuse to not give it a try.
 
 
 You need to install [VirtualBox](http://www.virtualbox.org/) and then download the SDK for your platform avaialable [here](https://sailfishos.org/develop/).
@@ -209,7 +207,7 @@ In the code above, an action is attached to the onClicked event, using the pageS
 
 The Column element positions it's child vertically to avoid overlapping. The PageHeader elements define the title displayed on the top of the content and the Label, well it's just a label.
 
-Notice how spacing, font size and color are defined using the Theme object. In this way it's not necessary to hard code anything, and I will be confident that my app will scale well on multiple devices, and text will be easy to read on any ambiance users choose.
+Notice how spacing, font size and color are defined using the Theme object. It's not necessary to hard code anything, and I will be confident that my app will scale well on multiple devices, and text will be easy to read on any ambiance users choose.
 
 
 The Ambiances is a sort of "theme" in Sailfish but can also change the look of every application to match the colors and backgrounds selected by the user.
@@ -277,7 +275,6 @@ The "Application Output" tab will display all the logs from the app errors and  
 
 
 ### Summing Up
-
 
 
 Now you have the tools and the knowledge needed to write a basic but pleasant looking Sailfish application. I found Sailfish SDK more clever than the most of other mobile SDKs and the emulator runs smoothly, making development on this platform a real joy. I will discuss more about Silica UI components and their parallels with other mobile OS in future features and I am interested to hear how you have found working with Sailfish. 
