@@ -234,7 +234,7 @@ Next, I will enter some code that will make this app do something. The code demo
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
-    // Return the number of rows in the section.  I currently have two rows we would like to show
+    // Return the number of rows in the section.  I currently have three rows we would like to show
     return 3;
 }
 
