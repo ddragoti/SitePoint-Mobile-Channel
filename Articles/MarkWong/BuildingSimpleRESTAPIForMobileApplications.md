@@ -307,7 +307,7 @@ Next we need to obtain JSON from the REST api we published using the `djangorest
 }
 ```
 
-We need to ensure this method runs when the app starts, add the following to `viewDidLoad`:
+We need to ensure this method runs when the app starts, add the following below `viewDidLoad`:
 
 ```
 [self downloadData];
