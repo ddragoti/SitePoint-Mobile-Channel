@@ -218,34 +218,47 @@ Included in the article is the [REST API](https://github.com/quiksilv/simple-api
 
 ## The iOS mobile app
 
-I will go through the key steps required to create a mobile app that receives data from our API.  I am going to use the UITableView to display our data in a list.  In XCode 6.2, create a new project
+I will go through the key steps required to create a mobile app that receives data from our API.  I am going to use the UITableView to display our data in a list.  In XCode 6.3.1 (the latest version as of this writing), create a new project
 
 File > New > Project > iOS Application > Single View Application
 
 * Product Name: Fishes
 * Language: Objective-C
-* Devices: iPhone
+* Devices: iPhone (default was Universal, this includes both the iPhone and iPad)
 * Not using Core Data for now.
 
-Select a location on disk to save your project and then click Create.
+Select a location on disk to save your project and then click Create. The `Fishes`, `FishesTests` and `Fishes.xcodeproj` files and folders will be create. I will work on the files contained in the `Fishes` folder.
 
-By default, the project will be created with a View Controller.  I however will want to show the data from the REST API as a list, so we will use the Table View Controller instead.  So we will create a new set Objective-C files (File > New > File > iOS Source > Cocoa Touch Class).
+By default, the project will be created with a View Controller.  I however will want to show the data from the REST API as a list, so I will use the `Table View Controller` instead.  So now I will create a new set of Objective-C files (File > New > File > iOS Source > Cocoa Touch Class).
 
 Class: `TableViewController`
 Subclass of: `UITableViewController`
 we do not create a XIB file
 
-You have just created the `TableViewController.h` and `TableViewController.m` files.
+I have just created the `TableViewController.h` and `TableViewController.m` files. These files should be created in the `Fishes` folder.
 
-Go to the `Main.storyboard`, go to the Object library and drag the Table View Controller to the storyboard.  Select and delete the default View Controller.  Make sure that under Attributes Inspector, the checkbox for `Is Initial View Controller` for the selected Table View Controller is ticked.
+Go to the `Main.storyboard`, go to the [Object library](https://developer.apple.com/library/ios/recipes/xcode_help-IB_objects_media/Chapters/AddingObject.html "Object library") and drag the `Table View Controller` object to the storyboard.  Select and delete the default `View Controller`.  Make sure that under the [Inspector](https://developer.apple.com/library/mac/recipes/xcode_help-general/Chapters/AbouttheUtilityArea.html "Attributes Inspector"), the checkbox for `Is Initial View Controller` for the selected `Table View Controller` is ticked.
 
-In the `Main.storyboard`, expand the Table View Controller to expose Table View Cell then select the Attributes Inspector and enter FishCell in the Identifier.  Also change the Style to Subtitle from Basic.  This provides the utility to display the value set by `cell.detailTextLabel`.  This code below demonstrates the use of a simple NSArray to display data hardcoded in the UITableView.
+![xcode](xcode.png "Show the document outline or navigator to see the components available on Interface Builder. This could be useful for you to find the Table View Cell.")
+
+* In the `Main.storyboard`, expand the `Table View Controller` to expose `Table View Cell` then select the `Attributes Inspector` and enter `FishCell` in the `Identifier`. This links the cells in the Interface Builder's storyboard to the code.
+* Also change the `Style` to `Subtitle` from `Basic`.  This provides the utility to display the value set by `cell.detailTextLabel`. 
+* While selecting `Table View Controller` under the `Table View Controller Scene` as seen from the Document Outline, click on the Identity Inspector and enter `TableViewController` into Custom Class > Class. This links the entire scene to the `TableViewController.m` file.
+
+![xcode](xcode2.png "Here is where I changed the Custom Class.")
+
+Next, I will enter some code that will make this app do something. The code demonstrates the use of a simple `NSArray` to display data hardcoded in the `TableViewController.m`.
 
 ```objectivec
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+#warning Potentially incomplete method implementation.
+    // Return the number of sections.
+    return 1;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
-    // Return the number of rows in the section.  I currently have two rows we would like to show
-    return 2;
+    // Return the number of rows in the section.  I currently have three rows we would like to show
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -265,6 +278,8 @@ In the `Main.storyboard`, expand the Table View Controller to expose Table View 
     return cell;
 }
 ```
+Now, I can test my simple application.  Go to Product > Run.
+
 Next we need a way to obtain JSON from the REST api we published using djangorestframework.  I first establish an NSArray object called `fishJson` by registering it in the @interface level and synthesizing it with `@property` and `@synthesize`.  This replaces the codes for the setters and getters.  I then replace the code we had in the `numberOfRowsInSection`, where I change `fishes` with `fishJson` which contain the JSON we downloaded from the REST API.
 ```objectivec
 @interface TableViewController ()
