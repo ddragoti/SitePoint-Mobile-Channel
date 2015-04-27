@@ -1,21 +1,13 @@
 # Building simple REST API for mobile applications
 ## What is REST?
-
 Representational State Transfer (REST) is lightweight HTTP based and built on web servers much like how normal web sites are build on the backend.  Instead of delivering in HTML, which is a combination of presentation and data, we would display only data with a minimum number of formatting using separators and delimiters (like JSON).  One can think of it as just an architectural style for designing networked applications or as a different way of delivering web services.  REST is also browsable so it really helps developers modify and check the correctness of their code as only the data is displayed on the browser.  It is also a safer way of providing services or data access as it does not expose too much unnecessary surface area of the database used by the website.  Some more well-known REST apis are from [Twitter](https://dev.twitter.com/rest/public)  and [Facebook Graph](https://developers.facebook.com/docs/graph-api).
 
 REST is platform and language independent.  You could write a REST API with any language that are commonly associated with website publishing like PHP, Python or Ruby.  There are four commonly defined methods used in a REST architecture which are the create, read, update and delete methods.  I can also add other more specialized methods like getting the top ten most popular items or the highscore of all users either by writing a new method or using a query parameter like `/api/items?top=10`.
 
 ## HTTP Methods and API endpoints
-
-You might remember from creating web forms (synchronous) or ajax request (asynchronous) calls where you have used the GET and POST requests.  The PUT and DELETE requests are very much far less used.
-You’ve probably had written using PHP, Python or any other language to process form data, you have indeed written your own simple REST framework.
-POST, GET, PUT, DELETE which correspond to create, read, update, delete (CRUD) also related to the most basic of database operations
-API endpoints describe available operations on data exposed by the service.  Think of it as urls that provide data (GET request) or an url where you can submit data to (POST request).
-There are many data formats we could use but the more common ones are JSON and XML.
-GET /api/boats/123456 will return data on the boat with id 123456 even when applied multiple times.
+You might remember from creating web forms (synchronous) or ajax request (asynchronous) calls where you have used the GET and POST requests.  The PUT and DELETE requests are very much far less used.<br>You've probably had written using PHP, Python or any other language to process form data, you have indeed written your own simple REST framework.<br>POST, GET, PUT, DELETE which correspond to create, read, update, delete (CRUD) also related to the most basic of database operations<br>API endpoints describe available operations on data exposed by the service.  Think of it as urls that provide data (GET request) or an url where you can submit data to (POST request).<br>There are many data formats we could use but the more common ones are JSON and XML.<br>GET /api/boats/123456 will return data on the boat with id 123456 even when applied multiple times.
 
 ## Using djangorestframework to build a simple REST api
-
 I will be using Django (Python MVC) and djangorestframework.  Djangorestframework is built using django (python) specifically for exposing data via the REST framework.  I assume the reader is familiar with Django and will build a simple REST API to access data inside a database (just one table).  Here are the steps and code to create model and views.  For ease of entering data, we will input them using the existing Django admin page.
 
 To start of, you will need to have already installed Python v2.7 or later and Django 1.7.4 or later on your system that could publish web pages.  If you have not, please install [Python](http://www.python.org/download/) and [Django](https://www.djangoproject.com/download/).
@@ -64,7 +56,7 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
 
-If you open the URL http://127.0.0.1:8000/ you will see a placeholder website.
+If you open the URL [http://127.0.0.1:8000/](http://127.0.0.1:8000/) you will see a placeholder website.
 
 Now we have the bare skeleton of the site. Next we will build an app (a container) which houses a model (as in Model-View-Controller).  A model is the source of data for your app.  I am not going to talk too much about this but you can find more information about how to use models properly on the django website or any other MVC site.
 
@@ -95,6 +87,7 @@ Inside the `models.py` file, there is only the import line `from django.db impor
         created = models.DateTimeField('auto_now_add=True')
         active = models.BooleanField()
 ```
+
 This creates a class that exposes the name, created date of the fish and if the data row is active or not.  You can change the field type by referring [to the relevant documentation](https://docs.djangoproject.com/en/1.7/ref/models/fields/#field-types).
 
 Now add the fishes app to the `marine/settings.py` file to register it.  Under `INSTALLED_APPS`, add `fishes` to the list. Run `python manage.py sql fishes` to get a preview of the database schema SQL that will run when we activate this app.  
@@ -190,7 +183,7 @@ class FishViewSet(viewsets.ModelViewSet):
     serializer_class = FishSerializer
 ```
 
-Now if you open _http://127.0.0.1:8000/api/fishes/_ you will see the browsable API.
+Now if you open _[http://127.0.0.1:8000/api/fishes/](http://127.0.0.1:8000/api/fishes/)_ you will see the browsable API.
 
 ```javascript
 HTTP 200 OK
@@ -214,40 +207,36 @@ Allow: GET, POST, HEAD, OPTIONS
 ]
 ```
 
-Included in the article is the [REST API](https://github.com/quiksilv/simple-api-mobile/tree/master/restapi "REST API") sourcecode hosted on github.  There is no data so you would need to run `python manage.py migrate` or `python manage.py syncdb` on older Django versions.
+Included in the article is the [REST API](https://github.com/quiksilv/simple-api-mobile/tree/master/restapi "REST API") source code hosted on github. There is no data so you would need to run `python manage.py migrate` or `python manage.py syncdb` on older Django versions.
 
 ## The iOS mobile app
+I will go through the key steps required to create a mobile app that receives data from our API.  I am going to use the `UITableView` to display our data in a list.  In XCode 6.3.1 (the latest version as of writing), create a new project
 
-I will go through the key steps required to create a mobile app that receives data from our API.  I am going to use the UITableView to display our data in a list.  In XCode 6.3.1 (the latest version as of this writing), create a new project
+_File > New > Project > iOS Application > Single View Application_
+- **Product Name**: Fishes
+- **Language**: Objective-C
+- **Devices**: iPhone (default was Universal, this includes both the iPhone and iPad)
+- Not using Core Data for now.
 
-File > New > Project > iOS Application > Single View Application
+Select a location to save your project and click _Create_. We will work on the files contained the _Fishes_ folder.
 
-* Product Name: Fishes
-* Language: Objective-C
-* Devices: iPhone (default was Universal, this includes both the iPhone and iPad)
-* Not using Core Data for now.
+By default, the project has a View Controller. I want to show the data from the REST API as a list, so will use a `Table View Controller` instead. Create a new set of Objective-C files (_File > New > File > iOS Source > Cocoa Touch Class_).
+- **Class**: `TableViewController`
+- **Subclass of**: `UITableViewController`
+- We do not need a XIB file
 
-Select a location on disk to save your project and then click Create. The `Fishes`, `FishesTests` and `Fishes.xcodeproj` files and folders will be create. I will work on the files contained in the `Fishes` folder.
+Save these new files in the _Fishes_ folder.
 
-By default, the project will be created with a View Controller.  I however will want to show the data from the REST API as a list, so I will use the `Table View Controller` instead.  So now I will create a new set of Objective-C files (File > New > File > iOS Source > Cocoa Touch Class).
-
-Class: `TableViewController`
-Subclass of: `UITableViewController`
-we do not create a XIB file
-
-I have just created the `TableViewController.h` and `TableViewController.m` files. These files should be created in the `Fishes` folder.
-
-Go to the `Main.storyboard`, go to the [Object library](https://developer.apple.com/library/ios/recipes/xcode_help-IB_objects_media/Chapters/AddingObject.html "Object library") and drag the `Table View Controller` object to the storyboard.  Select and delete the default `View Controller`.  Make sure that under the [Inspector](https://developer.apple.com/library/mac/recipes/xcode_help-general/Chapters/AbouttheUtilityArea.html "Attributes Inspector"), the checkbox for `Is Initial View Controller` for the selected `Table View Controller` is ticked.
+Open _Main.storyboard_, go to the [Object library](https://developer.apple.com/library/ios/recipes/xcode_help-IB_objects_media/Chapters/AddingObject.html "Object library") and drag the `Table View Controller` object to the storyboard.  Select and delete the default `View Controller`.  Make sure that in the [Inspector](https://developer.apple.com/library/mac/recipes/xcode_help-general/Chapters/AbouttheUtilityArea.html "Attributes Inspector"), the checkbox for _Is Initial View Controller_ for the selected `Table View Controller` is ticked.
 
 ![xcode](xcode.png "Show the document outline or navigator to see the components available on Interface Builder. This could be useful for you to find the Table View Cell.")
-
-* In the `Main.storyboard`, expand the `Table View Controller` to expose `Table View Cell` then select the `Attributes Inspector` and enter `FishCell` in the `Identifier`. This links the cells in the Interface Builder's storyboard to the code.
-* Also change the `Style` to `Subtitle` from `Basic`.  This provides the utility to display the value set by `cell.detailTextLabel`. 
-* While selecting `Table View Controller` under the `Table View Controller Scene` as seen from the Document Outline, click on the Identity Inspector and enter `TableViewController` into Custom Class > Class. This links the entire scene to the `TableViewController.m` file.
+- In _Main.storyboard_, expand the `Table View Controller` to expose `Table View Cell`, then select the _Attributes Inspector_ and enter `FishCell` as the _Identifier_. This links the cells in the Interface Builder's storyboard to the code.
+- Change the `Style` to _Subtitle_ from _Basic_.  This allows us to display the value set by `cell.detailTextLabel`.
+- Select `Table View Controller` under the `Table View Controller Scene`, click on the Identity Inspector and enter `TableViewController` into Custom Class > Class. This links the entire scene to the _TableViewController.m_ file.
 
 ![xcode](xcode2.png "Here is where I changed the Custom Class.")
 
-Next, I will enter some code that will make this app do something. The code demonstrates the use of a simple `NSArray` to display data hardcoded in the `TableViewController.m`.
+Next, I will add code that will make this app do something. The code demonstrates the use of a simple `NSArray` to display data hardcoded in the _TableViewController.m_ replace any existing functions with the below.
 
 ```objectivec
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -278,9 +267,11 @@ Next, I will enter some code that will make this app do something. The code demo
     return cell;
 }
 ```
-Now, I can test my simple application.  Go to Product > Run.
 
-Next we need a way to obtain JSON from the REST api we published using djangorestframework.  I first establish an NSArray object called `fishJson` by registering it in the @interface level and synthesizing it with `@property` and `@synthesize`.  This replaces the codes for the setters and getters.  I then replace the code we had in the `numberOfRowsInSection`, where I change `fishes` with `fishJson` which contain the JSON we downloaded from the REST API.
+Now, we can test this simple application. Select to _Product > Run_.
+
+Next we need to obtain JSON from the REST api we published using the `djangorestframework`.  I established a `NSArray` object called `fishJson` by registering it at the`@interface`level and synthesizing it with`@property`and`@synthesize`.  This replaces the code for the setters and getters.  I then replace the code we had in the`numberOfRowsInSection`, where I change`fishes`with`fishJson` which contains the JSON we downloaded from the REST API. Again replace any existing functions or declarations.
+
 ```objectivec
 @interface TableViewController ()
 @property (strong) NSArray *fishJson;
@@ -315,7 +306,15 @@ Next we need a way to obtain JSON from the REST api we published using djangores
     }
 }
 ```
-Also, we update the method `numberOfRowsInSection`.  The code makes sure that the number of rows matches the number of elements as contained in the `fishJson` array.
+
+We need to ensure this method runs when the app starts, add the following to `viewDidLoad`:
+
+```
+[self downloadData];
+```
+
+Here we update the `numberOfRowsInSection` method.  This code ensures that the number of rows matches the number of elements contained in the `fishJson` array.
+
 ```objectivec
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
@@ -323,4 +322,21 @@ Also, we update the method `numberOfRowsInSection`.  The code makes sure that th
     return [fishJson count];
 }
 ```
-Now you have a working simple mobile app to display data obtained from an online or local REST API.  To run the mobile app on the iOS simulator, go to Product then Run.  If you have problems getting the iOS code error free, you can download it [here](https://github.com/quiksilv/simple-api-mobile/tree/master/iphoneapp "iPhone code").
+
+And update the `cellForRowAtIndexPath` method so it loads entries from our REST feed:
+
+```
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FishCell" forIndexPath:indexPath];
+
+    // Configure the cell...
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FishCell"];
+    }
+    [cell.textLabel setText:[[fishJson objectAtIndex:indexPath.row] objectForKey:@"name"] ];
+    [cell.detailTextLabel setText:[[fishJson objectAtIndex:indexPath.row] objectForKey:@"created"]];
+    return cell;
+}
+```
+
+Now you have a working simple mobile app to display data obtained from an online or local REST API.
