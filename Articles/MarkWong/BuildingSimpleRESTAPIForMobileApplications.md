@@ -1,18 +1,18 @@
 # Building simple REST API for mobile applications
 ## What is REST?
-Representational State Transfer (REST) is lightweight HTTP based and built on web servers much like how normal web sites are build on the backend.  Instead of delivering in HTML, which is a combination of presentation and data, we would display only data with a minimum number of formatting using separators and delimiters (like JSON).  One can think of it as just an architectural style for designing networked applications or as a different way of delivering web services.  REST is also browsable so it really helps developers modify and check the correctness of their code as only the data is displayed on the browser.  It is also a safer way of providing services or data access as it does not expose too much unnecessary surface area of the database used by the website.  Some more well-known REST apis are from [Twitter](https://dev.twitter.com/rest/public)  and [Facebook Graph](https://developers.facebook.com/docs/graph-api).
+Representational State Transfer (REST) is lightweight, HTTP based and runs on web servers much like 'normal' web sites.  Instead of delivering in HTML, which is a combination of presentation and data, data is displayed with minimum formatting using separators and delimiters (like JSON). It can be thought of as an architectural style for designing networked applications or as a way of delivering web services.  REST is browsable, so helps developers modify and check the correctness of their code as only the data is displayed in the browser.  It is a safer method of providing services or data access as it does not expose much unnecessary surface area of the database used by the website.  Some well-known REST apis are from [Twitter](https://dev.twitter.com/rest/public)  and [Facebook Graph](https://developers.facebook.com/docs/graph-api).
 
-REST is platform and language independent.  You could write a REST API with any language that are commonly associated with website publishing like PHP, Python or Ruby.  There are four commonly defined methods used in a REST architecture which are the create, read, update and delete methods.  I can also add other more specialized methods like getting the top ten most popular items or the highscore of all users either by writing a new method or using a query parameter like `/api/items?top=10`.
+REST is platform and language independent.  You could write a REST API with any languages that are typically associated with website creation such as PHP, Python or Ruby. There are four commonly defined methods used in REST architecture. These are the _create_, _read_, _update_ and _delete_ (CRUD) methods.  It is also possible to add more specialized methods such as retrieving the top ten most popular items or the highscore of all users. This could be achieved by writing a new method or using a query parameter such as `/api/items?top=10`.
 
 ## HTTP Methods and API endpoints
-You might remember from creating web forms (synchronous) or ajax request (asynchronous) calls where you have used the GET and POST requests.  The PUT and DELETE requests are very much far less used.<br>You've probably had written using PHP, Python or any other language to process form data, you have indeed written your own simple REST framework.<br>POST, GET, PUT, DELETE which correspond to create, read, update, delete (CRUD) also related to the most basic of database operations<br>API endpoints describe available operations on data exposed by the service.  Think of it as urls that provide data (GET request) or an url where you can submit data to (POST request).<br>There are many data formats we could use but the more common ones are JSON and XML.<br>GET /api/boats/123456 will return data on the boat with id 123456 even when applied multiple times.
+You might remember from creating web forms (synchronous) or ajax request (asynchronous) calls that you used GET and POST requests.  The PUT and DELETE requests are less used. If you then wrote an application in  PHP, Python or other language to process form data, you have written your own simple REST framework. POST, GET, PUT and DELETE correspond to create, read, update and delete and relate to basic database operations. API endpoints describe available operations on data exposed by the service.  Think of them as urls that provide data (GET request) or an url where you can submit data to (POST request). Many data formats could be used but the more common are JSON and XML. GET _/api/boats/123456_ will return data on the boat with an id of 123456 even when applied multiple times.
 
 ## Using djangorestframework to build a simple REST api
-I will be using Django (Python MVC) and djangorestframework.  Djangorestframework is built using django (python) specifically for exposing data via the REST framework.  I assume the reader is familiar with Django and will build a simple REST API to access data inside a database (just one table).  Here are the steps and code to create model and views.  For ease of entering data, we will input them using the existing Django admin page.
+We will be using Django (Python MVC framework) and _djangorestframework_.  Djangorestframework is built using django (python) specifically for exposing data via the REST framework.
 
-To start of, you will need to have already installed Python v2.7 or later and Django 1.7.4 or later on your system that could publish web pages.  If you have not, please install [Python](http://www.python.org/download/) and [Django](https://www.djangoproject.com/download/).
+To begin, you will need to have Python v2.7 or later and Django 1.7.4 or later installed.  If you do not, install [Python](http://www.python.org/download/) and [Django](https://www.djangoproject.com/download/) now.
 
-You can easily test your installation by firing up your command line, and type the `python` command, all being well you should see version information. Continue by typing:
+You can test your installation by firing up the command line and typing the `python` command. All being well you should see version information. Continue by typing:
 
 ```bash
 >>> import django
@@ -20,7 +20,7 @@ You can easily test your installation by firing up your command line, and type t
 1.7.4
 ```
 
-This verifies that you have set up Django on your system.  Next, we build the Django project.
+This verifies that you have Django installed on your system.  Next, we build the Django project:
 
 ```bash
 $ django-admin.py startproject marine
@@ -58,7 +58,7 @@ Quit the server with CONTROL-C.
 
 If you open the URL [http://127.0.0.1:8000/](http://127.0.0.1:8000/) you will see a placeholder website.
 
-Now we have the bare skeleton of the site. Next we will build an app (a container) which houses a model (as in Model-View-Controller).  A model is the source of data for your app.  I am not going to talk too much about this but you can find more information about how to use models properly on the django website or any other MVC site.
+Now we have a bare skeleton of the site. Next we will build an app (a container) which houses a model (as in Model-View-Controller).  A model is the source of data for your app.
 
 Typing:
 
@@ -79,7 +79,7 @@ fishes/
     views.py
 ```
 
-Inside the `models.py` file, there is only the import line `from django.db import models`.  Add the following code to it.
+Inside the `models.py` file, there is the import line `from django.db import models`.  Add the following code to it.
 
 ```python
     class Fish(models.Model):
@@ -90,7 +90,7 @@ Inside the `models.py` file, there is only the import line `from django.db impor
 
 This creates a class that exposes the name, created date of the fish and if the data row is active or not.  You can change the field type by referring [to the relevant documentation](https://docs.djangoproject.com/en/1.7/ref/models/fields/#field-types).
 
-Now add the fishes app to the `marine/settings.py` file to register it.  Under `INSTALLED_APPS`, add `fishes` to the list. Run `python manage.py sql fishes` to get a preview of the database schema SQL that will run when we activate this app.  
+Now add the fishes app to the `marine/settings.py` file to register it.  Do this by under `INSTALLED_APPS`, adding `fishes` to the list. Run `python manage.py sql fishes` to see a preview of the database schema SQL that will run when we activate the app.  
 
 ```sql
     BEGIN;
@@ -105,15 +105,15 @@ Now add the fishes app to the `marine/settings.py` file to register it.  Under `
     COMMIT;
 ```
 
-To confirm creating the relevant tables on the default sqlite database, type `python manage.py migrate` or `python manage.py syncdb` on older Django versions. Django will create authentication tables by default and the empty `fishes_fish` table in a sqlite3 database.  It will ask if you want to create a superuser as this is the first time you run Django.
+To confirm creating the relevant tables in the default sqlite database, type `python manage.py migrate` or `python manage.py syncdb` on older Django versions. Django will create authentication tables by default and the empty `fishes_fish` table in a sqlite3 database. The prompt will ask if you want to create a superuser as this is the first time you have run Django.
 
-If for some reason you do not get prompted to create a superuser, in the command prompt, type:
+If for some reason you do not get prompted to create a superuser, at the command prompt, type:
 
 ```bash
 $ python manage.py createsuperuser
 ```
 
-Follow the instructions to create an administrator's account.  Luckily Django provides a built-in admin page that lets you quickly insert and modify data.  However, you need to activate this ability by editing the `admin.py` file inside the `fishes` folder.  Add the following code after `from django.contrib import admin`
+Follow the instructions to create an administrator's account. Django provides a built-in admin page that lets you insert and modify data. The feature needs to be activated by editing the `admin.py` file inside the `fishes` folder.  Add the following code after `from django.contrib import admin`
 
 ```python
     ...
@@ -121,17 +121,17 @@ Follow the instructions to create an administrator's account.  Luckily Django pr
     admin.site.register(Fish)
 ```
 
-You will use the account we created to log into the admin page.  Start the development server:
+We will use the account we created to log into the admin page.  Start the development server:
 
 ```bash
 $ python manage.py runserver
 ```
 
-Open _127.0.0.1:8000/admin_ and enter the superuser id and password.  You should see a admin page with the `Marine` list.  Click on `Fishes` to add or modify data.  Add some data to it.
+Open _127.0.0.1:8000/admin_ and enter the superuser id and password.  You should see a admin page with the `Marine` list.  Click on `Fishes` to add or modify data.  Add some data.
 
 ![Yeay! you did it!](milestone1.png "The django admin page.  Add some data.")
 
-Up to this point, you have built a working, but plain Django website.  I will now incorporate `djangorestframework` to the site by [downloading and installing it](http://www.django-rest-framework.org/#installation). One key thing to remember is to add `rest_framework` into the `INSTALLED_APPS` list in `marine/settings.py` and change `urls.py` to
+Up to this point, we have built a working, but plain Django website. We will now incorporate the `djangorestframework` to the site by [downloading and installing it](http://www.django-rest-framework.org/#installation). One key thing to remember is to add `rest_framework` to the `INSTALLED_APPS` list in `marine/settings.py` and change `urls.py` to
 
 ```python
 from django.contrib import admin
@@ -154,9 +154,9 @@ urlpatterns = patterns('',
 )
 ```
 
-This code switches on the API routing which is crucial to the `djangorestframework`.  If you are familiar with regular expressions, that is how I set the valid URLs of the site.
+This code switches on API routing which is crucial to the `djangorestframework and uses regular expression to set the valid URLs of the site.
 
-When we installed `djangorestframework`, it gave us the ability to use serializers, which flattens the data obtained from the fish model into string format, either XML or JSON.  To create a serializer for the fishes model, we create a file under the `fishes` folder and call it `serializers.py`.  Here is the contents of that file.
+When we installed `djangorestframework`, it gave us the ability to use serializers, which flattens the data obtained from the fish model into a string format, either XML or JSON.  To create a serializer for the fishes model, we create a file under the `fishes` folder and call it `serializers.py`.  Here are the contents of that file:
 
 ```python
 from fishes.models import Fish
@@ -207,10 +207,10 @@ Allow: GET, POST, HEAD, OPTIONS
 ]
 ```
 
-Included in the article is the [REST API](https://github.com/quiksilv/simple-api-mobile/tree/master/restapi "REST API") source code hosted on github. There is no data so you would need to run `python manage.py migrate` or `python manage.py syncdb` on older Django versions.
+You can find the source code for the [REST API app on GitHub](https://github.com/sitepoint-editors/simple-api-mobile "REST API"). There is no data so you will need to run `python manage.py migrate` or `python manage.py syncdb` on older Django versions after downloading.
 
 ## The iOS mobile app
-I will go through the key steps required to create a mobile app that receives data from our API.  I am going to use the `UITableView` to display our data in a list.  In XCode 6.3.1 (the latest version as of writing), create a new project
+Next we will go through the key steps required to create a mobile app that receives data from the API. We are using the `UITableView` to display our data in a list.  In XCode 6.3.1 (the latest version as of writing), create a new project
 
 _File > New > Project > iOS Application > Single View Application_
 - **Product Name**: Fishes
@@ -220,7 +220,7 @@ _File > New > Project > iOS Application > Single View Application_
 
 Select a location to save your project and click _Create_. We will work on the files contained the _Fishes_ folder.
 
-By default, the project has a View Controller. I want to show the data from the REST API as a list, so will use a `Table View Controller` instead. Create a new set of Objective-C files (_File > New > File > iOS Source > Cocoa Touch Class_).
+By default, the project has a View Controller. We want to show the data from the REST API as a list, so will use a `Table View Controller` instead. Create a new set of Objective-C files (_File > New > File > iOS Source > Cocoa Touch Class_).
 - **Class**: `TableViewController`
 - **Subclass of**: `UITableViewController`
 - We do not need a XIB file
@@ -230,13 +230,13 @@ Save these new files in the _Fishes_ folder.
 Open _Main.storyboard_, go to the [Object library](https://developer.apple.com/library/ios/recipes/xcode_help-IB_objects_media/Chapters/AddingObject.html "Object library") and drag the `Table View Controller` object to the storyboard.  Select and delete the default `View Controller`.  Make sure that in the [Inspector](https://developer.apple.com/library/mac/recipes/xcode_help-general/Chapters/AbouttheUtilityArea.html "Attributes Inspector"), the checkbox for _Is Initial View Controller_ for the selected `Table View Controller` is ticked.
 
 ![xcode](xcode.png "Show the document outline or navigator to see the components available on Interface Builder. This could be useful for you to find the Table View Cell.")
-- In _Main.storyboard_, expand the `Table View Controller` to expose `Table View Cell`, then select the _Attributes Inspector_ and enter `FishCell` as the _Identifier_. This links the cells in the Interface Builder's storyboard to the code.
+- In _Main.storyboard_, expand the `Table View Controller` to expose `Table View Cell`, select the _Attributes Inspector_ and enter `FishCell` as the _Identifier_. This links the cells in the Interface Builder storyboard to the code.
 - Change the `Style` to _Subtitle_ from _Basic_.  This allows us to display the value set by `cell.detailTextLabel`.
-- Select `Table View Controller` under the `Table View Controller Scene`, click on the Identity Inspector and enter `TableViewController` into Custom Class > Class. This links the entire scene to the _TableViewController.m_ file.
+- Select `Table View Controller` under the `Table View Controller Scene`, click on the Identity Inspector and enter `TableViewController` into _Custom Class > Class_. This links the entire scene to the _TableViewController.m_ file.
 
 ![xcode](xcode2.png "Here is where I changed the Custom Class.")
 
-Next, I will add code that will make this app do something. The code demonstrates the use of a simple `NSArray` to display data hardcoded in the _TableViewController.m_ replace any existing functions with the below.
+Next, we add code that will make this app do something. The code demonstrates the use of a simple `NSArray` to display data hardcoded in the _TableViewController.m_. Replace any existing functions with the below.
 
 ```objectivec
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -261,16 +261,16 @@ Next, I will add code that will make this app do something. The code demonstrate
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FishCell"];
     }
-    //I will replace fishes with fishJson once we have code that downloads from the REST api
+    //We will replace fishes with fishJson once we have code that downloads from the REST api
     [cell.textLabel setText:[[fishes objectAtIndex:indexPath.row] objectForKey:@"name"] ];
     [cell.detailTextLabel setText:[[fishes objectAtIndex:indexPath.row] objectForKey:@"created"]];
     return cell;
 }
 ```
 
-Now, we can test this simple application. Select to _Product > Run_.
+Now, we can test this simple application. Select _Product > Run_.
 
-Next we need to obtain JSON from the REST api we published using the `djangorestframework`.  I established a `NSArray` object called `fishJson` by registering it at the`@interface`level and synthesizing it with`@property`and`@synthesize`.  This replaces the code for the setters and getters.  I then replace the code we had in the`numberOfRowsInSection`, where I change`fishes`with`fishJson` which contains the JSON we downloaded from the REST API. Again replace any existing functions or declarations.
+Next we need to obtain JSON from the REST api we published using the `djangorestframework`. We established a `NSArray` object called `fishJson` by registering it at the`@interface`level and synthesizing it with`@property`and`@synthesize`.  This replaces the code for the setters and getters.  We then replace the code we had in the`numberOfRowsInSection`, where we replace `fishes` with `fishJson` that contains the JSON from the REST API. Again replace any existing functions or declarations.
 
 ```objectivec
 @interface TableViewController ()
@@ -323,7 +323,7 @@ Here we update the `numberOfRowsInSection` method.  This code ensures that the n
 }
 ```
 
-And update the `cellForRowAtIndexPath` method so it loads entries from our REST feed:
+Update the `cellForRowAtIndexPath` method so it loads entries from our REST feed:
 
 ```
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -339,4 +339,4 @@ And update the `cellForRowAtIndexPath` method so it loads entries from our REST 
 }
 ```
 
-Now you have a working simple mobile app to display data obtained from an online or local REST API.
+Now we have a working simple mobile app to display data obtained from an online or local REST API. You can find the code for the iOS app in the same repository above. This tutorial contained a lot of concepts and components which is typical of 'real world' apps. If you experienced any issues or have any questions or comments, please let me know in teh comments below.
