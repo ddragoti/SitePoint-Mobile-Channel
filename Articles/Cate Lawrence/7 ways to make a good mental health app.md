@@ -1,4 +1,4 @@
-# 7 ways to make a good mental health app
+# 6 ways to make a good mental health app
 Have you ever thought of creating an app to aid those affected by mental health? The role of mobile phone apps in mental health treatment is a relatively new tool. Apps can be utilized by mental health practitioners, individuals interested in mental well being, those treated from an addiction as well as those with chronic debilitating psychiatric conditions. [Various studies suggest](http://mental.jmir.org/2014/1/e5/) that people with mental health conditions are interested in using apps in their treatment and thus increasing the likelihood of adoption.
 
 But what makes a good mental health app and how can you ensure you are making something worthwhile? In this article I'll look at the detail of the mental health sector, explore some interesting apps and innovations and discuss the challenges for developers. We will be covering how to:
