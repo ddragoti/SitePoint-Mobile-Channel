@@ -31,6 +31,7 @@ I think that H.A.X.M is the most useful plugin that an Android developer must ha
 
 ##2. Genymotion
 
+![](https://raw.githubusercontent.com/valdio/SitePoint-Mobile-Channel/master/Articles/Valdio%20Veliu/10%20Plugins%20For%20Android%20Studio/images/0.PNG)
 
 
 Genymotion is the ultimate tool for testing your Android application and enables you to run custom versions of Android, built for execution inside VirtualBox and equipped with the complete set of sensors and features in order to interact with a virtual Android environment.  With Genymotion, you can test your Android applications on a wide range of virtual devices for development and its emulators are a lot faster than the native Android ones. 
@@ -45,6 +46,8 @@ Every developer who wants to make sure his/her application runs smoothly in ever
 
 ##3. Android Drawable Importer
 
+![](https://github.com/valdio/SitePoint-Mobile-Channel/blob/master/Articles/Valdio%20Veliu/10%20Plugins%20For%20Android%20Studio/images/drawable1.PNG)
+![](https://github.com/valdio/SitePoint-Mobile-Channel/blob/master/Articles/Valdio%20Veliu/10%20Plugins%20For%20Android%20Studio/images/drawable2.PNG)
 
 
 
@@ -66,9 +69,9 @@ Android ButterKnife Zelezny is a Android Studio Plugin for generating ButterKnif
 
 Here is an example how the code looks like:
 Before using Android ButterKnife
-
+![](https://github.com/valdio/SitePoint-Mobile-Channel/blob/master/Articles/Valdio Veliu/10 Plugins For Android Studio/images/bk1.PNG)
 After using  Android ButterKnife:
-
+![](https://github.com/valdio/SitePoint-Mobile-Channel/blob/master/Articles/Valdio%20Veliu/10%20Plugins%20For%20Android%20Studio/images/bk2.PNG)
 
 
 ##5.Android Holo Colors Generator
@@ -83,6 +86,7 @@ For everyone who is looking to develop stable Android applications this plugin m
 
  Here is an example of my application recorded on Robotium Recorder:
 
+![](https://github.com/valdio/SitePoint-Mobile-Channel/blob/master/Articles/Valdio%20Veliu/10%20Plugins%20For%20Android%20Studio/images/Robotium.jpg)
 
 
 
@@ -93,6 +97,7 @@ Android Studio is equipped with a visual layout editor out of the box, but a sta
 Is not possible on a static preview to preview animation, colours and touch zones so jimu Mirror is a plugin that allows you to test your layout on the fly on a real device. 
 jimu Mirror gives you on-device previews of Android layouts that update as you code.
 This plugin offers you a realistic context before writing the java code to link the application together. 
+
 ##8. strings-xml-tools
 
 Strings-xml-tools is a small but very useful plugin that can be used to manage the string resources in Android projects. It provides basic operations of sorting entries in Android localization files and adding missing strings. There are limited things that you can with this plugin but if your application has a large number of of string resources this plugin might be helpful. 
