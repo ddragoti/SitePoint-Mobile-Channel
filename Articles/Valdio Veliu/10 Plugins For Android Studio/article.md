@@ -1,10 +1,10 @@
 #Top 8 plug-ins for Android Studio
 
-Android Studio is the official Google IDE designed for native Android application development, based on JetBrainsí IntelliJ IDEA. It was first announced at Google I/O 2013 as the successor to Eclipse and was welcomed by the Android community, albeit with some criticism as is normal in such cases. After a long beta phase, the final version was announced in December of last year. 
+Android Studio is the official Google IDE designed for native Android application development, based on JetBrains‚Äô IntelliJ IDEA. It was first announced at Google I/O 2013 as the successor to Eclipse and was welcomed by the Android community, albeit with some criticism as is normal in such cases. After a long beta phase, the final version was announced in December of last year. 
 
 On its own Android Studio is a fully-featured development environment equipped with the complete tools needed to develop Android applications for all devices, from smart watches to automobiles.
 
-But there is always space  for improvement, and luckily Android Studio offers support for third party plug-ins,so today iím going to list some of the most useful ones for your developing needs.
+But there is always space  for improvement, and luckily Android Studio offers support for third party plug-ins,so today i‚Äôm going to list some of the most useful ones for your developing needs.
 
 ##1. H.A.X.M (Hardware Accelerated Execution Manager)
 
@@ -58,7 +58,7 @@ This plugin is the most useful tool that that every developer must try to speed 
 
 ##4. Android ButterKnife Zelezny
 
-Android ButterKnife is a ìView Injection Library for Androidî. It gives a better view of the code and makes it more readable. ButterKnife is a great library, which allows you to focus on the logic rather than on the glue code for finding views or adding listeners.
+Android ButterKnife is a ‚ÄúView Injection Library for Android‚Äù. It gives a better view of the code and makes it more readable. ButterKnife is a great library, which allows you to focus on the logic rather than on the glue code for finding views or adding listeners.
 In programing with ButterKnife you have to perform injection on arbitrary objects. Basically  you have to write your injection in this form:
 
      @InjectView(R.id.title) TextView title;
@@ -70,7 +70,9 @@ Android ButterKnife Zelezny is a Android Studio Plugin for generating ButterKnif
 Here is an example how the code looks like:
 Before using Android ButterKnife
 ![](https://github.com/valdio/SitePoint-Mobile-Channel/blob/master/Articles/Valdio Veliu/10 Plugins For Android Studio/images/bk1.PNG)
+
 After using  Android ButterKnife:
+
 ![](https://github.com/valdio/SitePoint-Mobile-Channel/blob/master/Articles/Valdio%20Veliu/10%20Plugins%20For%20Android%20Studio/images/bk2.PNG)
 
 
