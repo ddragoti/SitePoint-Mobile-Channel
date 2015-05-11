@@ -1,0 +1,315 @@
+﻿Understanding WebViews in Android
+=========
+
+Introduction
+----
+
+Android provides a variety of views to build the UI of your application. One such very interesting and useful view is the WebView, which Android provides. WebView are views which can be embedded in your Activities are can be used to display Web pages. Having the ability of displaying web pages in your activity has a lot of advantages as it helps to reuse your Web pages and Web apps in your Android app. Also, as the content of the Web page can be controlled and changed from the server directly it can be very useful for some kinds of pages like user agreement or terms and conditions which might require a quick change due to any reasons. The page content can be changed without forcing the user to update the app. Also, sometimes it might be useful to design the web page so that it can be used on mobile apps on different platforms like Android , ios etc..Loading web pages also become necessary when you need to load an external page which is not under your control and does not have a public android intent which it exposes.So in this article we are going to see how we can embed a WebView in our activity to display Web page.
+
+Embedding a WebView in your activity to display a web page.
+----
+
+Lets start by learning how we can add the WebView in our activity. To add a WebView from the layout xml you can use the WebView as shown in the layout file called as activity_with_web_view.xml 
+
+
+```sh
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <WebView 
+      android:id="@+id/webview"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+  />
+
+</LinearLayout>
+
+
+```
+In the above code we have created a linear layout which will be a container view to hold the WebView. Inside the linear layout, we have added a WebView which we will use in the code to load a Web page via URL.
+As for loading the Webpage via URL is going to require to connect to the internet , you will have to add the following permission to your AndroidManifest.xml 
+
+```sh
+<uses-permission android:name="android.permission.INTERNET" />
+```
+Once the layout and permission is defined we will have to create an activity will will use this layout and load the Web page as follows 
+
+```sh
+import android.app.Activity;
+import android.os.Bundle;
+import android.webkit.WebView;
+
+public class WebVievActivityWithURL extends Activity {
+
+    private WebView myWebView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_with_web_view);
+
+        myWebView = (WebView) findViewById(R.id.webview);
+
+        myWebView.loadUrl("https://m.facebook.com");
+    }
+
+}
+
+```
+In the above code in the onCreate of the activity we set the content view as the layout we defined above and then get the WebView using the function findViewById. Once we have the webView reference we can call the function loadUrl with the url we want to load in the WebView.Once we have done this and launch this activity we should see the web page load in our WebView as seen below.
+<image01>
+
+
+
+
+Embedding a WebView in your activity to display static html content.
+-----------
+
+
+In some cases you might not want to load a Web page from an URL but directly load the HTML content in the WebView. The WebView provides a functionality to do this using the loadDataWithBaseURL function. We will see how to do this in the following activity 
+
+```sh
+import android.app.Activity;
+import android.os.Bundle;
+import android.webkit.WebView;
+
+public class WebViewActivityWithHTML extends Activity {
+
+    private WebView myWebView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_with_web_view);
+
+        myWebView = (WebView) findViewById(R.id.webview);
+        myWebView.loadDataWithBaseURL("file:///android_asset/", getHTMLData(),
+                "text/html", "UTF-8", "");
+    }
+
+    private String getHTMLData() {
+        StringBuilder html = new StringBuilder();
+        html.append("<html>");
+        html.append("<head>");
+
+        html.append("<link rel=stylesheet href='css/style.css'>");
+        html.append("</head>");
+        html.append("<body>");
+        html.append("<div id ='main'> Loading html data in WebView</div>");
+        html.append("</body>");
+        html.append("</html>");
+
+        return html.toString();
+    }
+}
+
+
+```
+
+The above activity WebViewActivityWithHTML uses the same layout activity_with_web_view which we defined in the previous section. In the onCreate function we again get the reference of the WebView. Then we use to to call loadDataWithBaseURL which takes as parameters the base_url is what's the base url to be used for all relative paths used in the HTML content.Here we pass as file:///android_asset/ as we want the css to be picked up from there. The second parameter is the HTML data which we create in code by appending the HTML tags and create a div with id as main and add some text there , the other parameters are the mime type and character encoding and history url. In cae you don’t want to pass the base URL the you can even use the function loadData which takes only three parameters as data, mimetype and character encoding. Now we have refered to a css/style.css in our HTML. To provide that we  also create a directory called css in the assets folder and a style.css file inside that with the following content 
+```sh
+
+#main {
+    color: #00ff00;
+}
+
+
+```
+
+In the above code we have just changed the color to green , we can also provide as other styles we want to be applied to the HTML page. Now, once we launch WebViewActivityWithHTML activity we will see the WebView launched with the static HTML as shown below.
+<image02>
+
+Handling navigation in WebViews
+--------------
+When using WebViews you might require to get callbacks on your app during the various processing which happens in the WebView during the load of a Web page.  To give you an example when a link is clicked in the WebView android does the default action on it which mostly might be to open the URL in a different browser.If we want to override this and load the URL in the WebView itself, then we need to provide a WebViewClient instance on the WebView which will handle callbacks on the WebView as shown in the below activity
+```sh
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+public class WebViewActivityWithWebClient extends Activity {
+    
+    private WebView myWebView;
+
+    /* (non-Javadoc)
+     * @see android.app.Activity#onCreate(android.os.Bundle)
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_with_web_view);
+
+        myWebView = (WebView) findViewById(R.id.webview);
+        myWebView.setWebViewClient(new MyWebViewClient());
+
+        myWebView.loadData(getHTMLData(),"text/html", "UTF-8");
+    }
+    
+    /**
+     * @return - Static HTML data
+     */
+    private String getHTMLData() {
+        StringBuilder html = new StringBuilder();
+        html.append("<html>");
+        html.append("<head>");
+        html.append("</head>");
+        html.append("<body>");
+        html.append("<div id ='main'> <a href ='https://m.facebook.com'> Go to Face book</a></div>");
+        html.append("</body>");
+        html.append("</html>");
+
+        return html.toString();
+    }
+    
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+           view.loadUrl(url);
+           return true;
+        }
+        
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            //You can add some custom functionality here
+        }
+        
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+          //You can add some custom functionality here
+        }
+        
+        @Override
+        public void onReceivedError(WebView view, int errorCode,
+                String description, String failingUrl) {
+            super.onReceivedError(view, errorCode, description, failingUrl);
+          //You can add some custom functionality here
+        }
+     }
+
+}
+
+```
+In the code above, we have set a custom WebView client, which overrides the shouldOverrideUrlLoading function and loads the URL right in the WebView rather than another browser and then returns true to signify that it will override the url loading. If we run this activity and click on the Go to Facebook link it will open the Facebook link right in the WebView. As shown it the code there are various other callbacks like onPageStarted, onPageFinished, onReceivedError which can be used to do different kinds on processing based on the app you are building and the Web page being loaded.
+<image03>
+
+
+Injecting JavaScript in WebViews
+--------------
+We you are building more complex Web pages for your mobile you might need to call some native methods from your Web page. To do this on the WebView you need enable the JavaScript setting in the WebView and then provide a class which will expose methods which can be called from JavaScipt. To see how we can expose JavaScript look at the below activity 
+
+
+```sh
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import android.app.Activity;
+import android.content.res.AssetManager;
+import android.os.Bundle;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.Toast;
+
+public class WebViewActivityWithJavaScript extends Activity {
+    private WebView myWebView;
+
+    /* (non-Javadoc)
+     * @see android.app.Activity#onCreate(android.os.Bundle)
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_with_web_view);
+
+        myWebView = (WebView) findViewById(R.id.webview);
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.addJavascriptInterface(new MyJavaScriptInterface(this), "Android");
+        myWebView.loadData(getHTMLData(),"text/html", "UTF-8");
+    }
+    
+    /**
+     * @return - Static HTML data
+     */
+    private String getHTMLData() {
+        StringBuilder html = new StringBuilder();
+        try {
+            AssetManager assetManager = getAssets();
+
+            InputStream input = assetManager.open("javascriptexample.html");
+            BufferedReader  br = new BufferedReader(new InputStreamReader(input));
+            String line;
+            while ((line = br.readLine()) != null) {
+                html.append(line);
+            }
+            br.close();
+        } catch (Exception e) {
+           //Handle the exception here
+        }
+        
+        return html.toString();
+    }
+    
+    public class MyJavaScriptInterface {
+        Activity activity;
+
+        MyJavaScriptInterface(Activity activity) {
+            this.activity = activity;
+        }
+
+        @JavascriptInterface
+        public void showToast(String toast) {
+            Toast.makeText(activity, toast, Toast.LENGTH_SHORT).show();
+        }
+        
+        @JavascriptInterface
+        public void closeActivity() {
+            activity.finish();
+        }
+    }
+}
+
+
+
+```
+In the above code we get the WebSettings of the WebView calling the getSettings method and set enable JavaScript using the method setJavaScriptEnabled. Then we call the method addJavascriptInterface and pass it an object and a string. The string which in the example is “Android” then can be used in the Web pages javascript to call the methods on the object which have the annotation @JavascriptInterface. In our class MyJavaScriptInterface we have added two such methods showToast which shows an Android toast and closeActivity which finishes the activity. In the above example we are loading the HTML we are using loadData ( even loadUrl could be used to load Web page from an url) which get the HTML in the function getHTMLData from a file stored in the asset folder with the name javascriptexample.html .
+Now create a file javascriptexample.html in the asset folder with the following content 
+
+
+```sh
+<html>
+
+<body>
+<input type="button" value="Show Toast" onClick="showAndroidToast('Toast to JavaScript interface')" />
+<br>
+<input type="button" value="Close this Activity" onClick="closeActivity()" />
+</body>
+<script type="text/javascript">
+    function showAndroidToast(toast) {
+        Android.showToast(toast);
+    }
+    
+     function closeActivity() {
+        Android.closeActivity();
+    }
+</script>
+
+</html>
+
+```
+
+The above code creates two buttons in HTML which, when clicked call a Javascript functions which in turn call the JavaScipt interface functions which we exposed. So as seen below if we run this activity and click on Show Toast , the toast will be shown as below
+
+<image04>
+Conclusion
+----------
+
+WebViews in Android provide a rich set of functionality and can become an important part of your app if you are building an app which need to load external Web pages or HTML data.WebViews also provide interesting ways to for Web pages to interact with the Android app using the JavaScript interface.So have fun using the WebView in your next Android app :).
