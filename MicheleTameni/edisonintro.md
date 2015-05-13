@@ -73,4 +73,5 @@ If offer a structured and sane API and does not tie you to specific hardware bec
 (https://github.com/intel-iot-devkit/upm)[UPM] is a high level repository for sensors that use libmraa. UPM typically represent a sensor as a class, with the constructor used to initialize the sensor and parameters is used to provide pin location on the board. Those classes usually expose an update() function that will be called in order to get new data from the sensor.
 
 ### Summing up
-Edison represent an interesting opportunity to anyone has a wearables/IoT ideas and want to experiment on a real, product ready platform, rich of features and that has a really low friction start as most of the developer can find a language that suite their needs and that they probably already know, with a cool set of feature, ready to use library and an open software platform ready to be hacked.
+Edison represent an interesting opportunity to anyone has a wearables/IoT ideas and want to experiment on a real, product ready platform. A platform rich of features and that has a really low friction to get started as most of the developer can find a language that they already know.
+With a cool set of feature, ready to use libraries and an open software platform ready to be hacked, Intel has made a great job in the aim to make things happen. 
